@@ -26,11 +26,13 @@ const webpackProdConf = () => {
             { from: `${config.assets}/images`, to: `${config.dist}/assets/images`},
             { from: `${config.assets}/audio`, to: `${config.dist}/assets/audio`},
         ])];
+        
+        const preparedWebpackConfig: any = webpackConfig();
 
-        webpackConfig.output.publicPath =  config.fontsPath;
+        preparedWebpackConfig.output.publicPath =  config.fontsPath;
 
-        webpackConfig.plugins = webpackConfig.plugins.concat(newPlugins);
-        return webpackConfig;
+        preparedWebpackConfig.plugins = preparedWebpackConfig.plugins.concat(newPlugins);
+        return preparedWebpackConfig;
 };
 
 export const webpackProdConfig = webpackProdConf();

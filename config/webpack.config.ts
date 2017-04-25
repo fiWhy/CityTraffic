@@ -4,14 +4,20 @@ import { plugins } from "./webpack-plugins.config";
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const webpackConfFnc = () => {
-    return {
+export const webpackConfig = (karma: boolean = false) => {
+    const preparedEntry = karma ? {} : {
         entry: {
             app: config.entry,
             vendor: config.vendor,
-        },
+        }
+    };
+
+    const preparedPlugins = karma? {} : {
+        plugins
+    };
+    return Object.assign({
         module: {
-            rules: loaders,
+            rules: loaders(karma),
         },
         output: {
             filename: config.distFileName,
@@ -24,8 +30,5 @@ const webpackConfFnc = () => {
             },
             extensions: config.extensions,
         },
-        plugins,
-    };
+    }, preparedEntry, preparedPlugins);
 };
-
-export const webpackConfig = webpackConfFnc();

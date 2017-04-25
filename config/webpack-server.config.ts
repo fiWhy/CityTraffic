@@ -4,7 +4,7 @@ import { devServerConfig } from './webpack-dev-server.config';
 import 'core-js/es6/object';
 
 const webpackServerConfigFnc = () => 
-     Object.assign(webpackConfig, {
+     Object.assign(webpackConfig(), {
         devServer: devServerConfig
     })
 

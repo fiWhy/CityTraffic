@@ -1,7 +1,21 @@
 import { config } from './main.config';
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const loadersConf = () => {
+export const loaders = (karma: boolean = false) => {
+
+    const styleUseArray = [
+        { loader: 'css-loader' },
+        { loader: 'autoprefixer-loader' },
+        {
+            loader: 'sass-loader',
+            options: {
+                includePaths: [
+                    config.src
+                ]
+            }
+        }
+    ];
+
     return [
         {
             test: /\.ts$/,
@@ -14,20 +28,9 @@ const loadersConf = () => {
         },
         {
             test: /\.(css|scss)$/,
-            use: ExtractTextPlugin.extract({
+            use: karma? styleUseArray: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: [
-                    { loader: 'css-loader' },
-                    { loader: 'autoprefixer-loader' },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            includePaths: [
-                                config.src
-                            ]
-                        }
-                    }
-                ]
+                use: styleUseArray
             })
         },
         {
@@ -61,5 +64,3 @@ const loadersConf = () => {
     ]
 
 }
-
-export const loaders = loadersConf();

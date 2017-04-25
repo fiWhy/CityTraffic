@@ -8,10 +8,7 @@ const karmaWebpackConf = () => {
     // };
     let webpackConfigCopy: any = Object.assign({
         devtool: 'inline-source-map'
-    }, webpackConfig);
-
-    delete(webpackConfigCopy.entry);
-    delete(webpackConfigCopy.plugins);
+    }, webpackConfig(true));
 
     webpackConfigCopy.module.rules[0].use.unshift({
         loader: 'istanbul-instrumenter-loader'

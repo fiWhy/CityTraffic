@@ -21,7 +21,10 @@
   },
   "devDependencies": {
     "@types/angular-material": "^1.1.49",
+    "@types/angular-mocks": "^1.5.9",
+    "@types/angular-ui-router": "^1.1.36",
     "@types/core-js": "^0.9.41",
+    "@types/jasmine": "2.5.41",
     "@types/karma": "^0.13.35",
     "@types/lodash": "ts2.0",
     "@types/node": "^7.0.13",
@@ -31,6 +34,7 @@
     "angular-mocks": "^1.6.4",
     "autoprefixer-loader": "^3.2.0",
     "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "html-loader": "^0.4.5",
