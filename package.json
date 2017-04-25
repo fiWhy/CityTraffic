@@ -1,0 +1,68 @@
+{
+  "name": "city-traffic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm i -g typescript node-sass karma-cli",
+    "serve": "ts-node ./tasks/webpack-server.ts",
+    "build": "ts-node ./tasks/webpack.ts",
+    "test": "karma start config/karma.config.ts"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-aria": "^1.6.4",
+    "angular-material": "^1.1.4",
+    "angular-ui-router": "^0.4.2",
+    "core-js": "^2.4.1",
+    "ts-node": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/angular-material": "^1.1.49",
+    "@types/core-js": "^0.9.41",
+    "@types/karma": "^0.13.35",
+    "@types/node": "^7.0.13",
+    "@types/webpack": "^2.2.15",
+    "@types/webpack-dev-server": "^1.12.6",
+    "@types/webpack-env": "^1.13.0",
+    "angular-mocks": "^1.6.4",
+    "autoprefixer-loader": "^3.2.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.10.1",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.28.0",
+    "istanbul-instrumenter-loader": "^2.0.0",
+    "jasmine": "^2.6.0",
+    "json-loader": "^0.5.4",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.3",
+    "node-sass": "^4.5.0",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
+    "ts-loader": "^2.0.1",
+    "tslint": "~4.4.2",
+    "tslint-loader": "^3.4.3",
+    "typescript": "~2.0.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiWhy/CityTraffic.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fiWhy/CityTraffic/issues"
+  },
+  "homepage": "https://github.com/fiWhy/CityTraffic#readme"
+}
