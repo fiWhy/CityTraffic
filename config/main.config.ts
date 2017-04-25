@@ -6,6 +6,7 @@ const configFnc = () => {
     const configRoot = root("config");
     const srcRelative = "/";
     const app = root("./src", "app");
+    const docs = "../docs";
     const reports = root("reports");
     const exclude = [/node_modules/, /\.spec.ts$/];
     const distFileName = "[name].bundle.js";
@@ -34,6 +35,7 @@ const configFnc = () => {
         env,
         app,
         dist,
+        docs,
         htmls,
         entry,
         vendor,

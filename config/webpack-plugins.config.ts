@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
 
 const webpackPluginsFnc = () => {
     const prepareHtmlPlugins = config.htmls.map((html) =>
@@ -31,8 +32,16 @@ const webpackPluginsFnc = () => {
             jQuery: "jquery",
         }),
         new ExtractTextPlugin({
-            filename:  "style.css",
-        })
+            filename: "style.css",
+        }),
+        new TypedocWebpackPlugin({
+            name: "Contoso",
+            mode: "file",
+            theme: "default",
+            out: config.docs,
+            includeDeclarations: false,
+            ignoreCompilerErrors: true,
+        }, './src/app')
     ]
 };
 

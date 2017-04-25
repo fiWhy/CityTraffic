@@ -7,6 +7,7 @@
     "setup": "npm i -g typescript node-sass karma-cli",
     "serve": "ts-node ./tasks/webpack-server.ts",
     "build": "ts-node ./tasks/webpack.ts",
+    "start": "npm run serve",
     "test": "karma start config/karma.config.ts"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "@types/angular-material": "^1.1.49",
     "@types/core-js": "^0.9.41",
     "@types/karma": "^0.13.35",
+    "@types/lodash": "ts2.0",
     "@types/node": "^7.0.13",
     "@types/webpack": "^2.2.15",
     "@types/webpack-dev-server": "^1.12.6",
@@ -50,6 +52,8 @@
     "ts-loader": "^2.0.1",
     "tslint": "~4.4.2",
     "tslint-loader": "^3.4.3",
+    "typedoc": "^0.5.10",
+    "typedoc-webpack-plugin": "^1.1.4",
     "typescript": "~2.0.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
