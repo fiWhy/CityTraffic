@@ -13,7 +13,7 @@ const karmaWebpackConf = () => {
     webpackConfigCopy.module.rules[0].use.unshift({
         loader: 'istanbul-instrumenter-loader'
     })
-    
+
     return webpackConfigCopy;
 }
 export const karmaWebpackConfig = karmaWebpackConf();

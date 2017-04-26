@@ -1,6 +1,6 @@
 import * as angular from "angular";
 
-export const Shared: ng.IModule = angular.module("app.shared", [
+export const SharedModule: ng.IModule = angular.module("app.shared", [
 
 ]);
 

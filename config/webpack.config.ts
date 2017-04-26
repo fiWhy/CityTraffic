@@ -25,9 +25,6 @@ export const webpackConfig = (karma: boolean = false) => {
             publicPath: "",
         },
         resolve: {
-            alias: {
-                vue$: "vue/dist/vue.esm.js",
-            },
             extensions: config.extensions,
         },
     }, preparedEntry, preparedPlugins);
