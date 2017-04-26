@@ -1,6 +1,6 @@
 import { mock, IControllerService } from "angular";
 
-describe("Login Controller", () => {
+describe("Contributing Controller", () => {
     beforeEach(mock.module("app"));
 
     let $controller;
@@ -8,7 +8,7 @@ describe("Login Controller", () => {
     let currentState;
     let controller;
     
-    const loginState = "login";
+    const state = "contributing";
 
     beforeEach(inject((_$controller_, _$state_) => {
         $controller = _$controller_;
@@ -16,11 +16,11 @@ describe("Login Controller", () => {
     }))
     
     beforeEach(() => {
-        currentState = $state.get(loginState);
+        currentState = $state.get(state);
         controller = new currentState.controller();
     })
     
     it("Should check controller initiates", () => {
-        expect(currentState.controller.name).toEqual("Login");
+        expect(currentState.controller.name).toEqual("Contributing");
     })
 })

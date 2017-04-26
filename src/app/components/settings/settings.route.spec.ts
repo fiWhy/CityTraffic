@@ -1,11 +1,11 @@
 import { mock, IControllerService } from "angular";
 
-describe("Login Router", () => {
+describe("Settings Router", () => {
     beforeEach(mock.module("app"));
 
     let $state;
     
-    const state = "login";
+    const state = "settings";
 
     beforeEach(inject((_$state_) => {
         $state = _$state_;
@@ -13,6 +13,6 @@ describe("Login Router", () => {
     
 
     it("Should check state changing", () => {
-        expect($state.href(state)).toEqual("#/login");
+        expect($state.href(state)).toEqual("#/settings");
     })
 })
