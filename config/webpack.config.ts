@@ -9,10 +9,11 @@ export const webpackConfig = (karma: boolean = false) => {
         entry: {
             app: config.entry,
             vendor: config.vendor,
-        }
+        },
+        devtool: 'inline-source-map'
     };
 
-    const preparedPlugins = karma? {} : {
+    const preparedPlugins = karma ? {} : {
         plugins
     };
     return Object.assign({

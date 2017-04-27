@@ -14,7 +14,7 @@ export class CacheService {
         let objectCached = this.cache.get(objectKey);
         if (!objectCached) {
             objectCached = {};
-        } 
+        }
         objectCached[key] = data;
         this.cache.put(objectKey, objectCached);
     }

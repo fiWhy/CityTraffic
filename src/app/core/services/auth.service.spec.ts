@@ -22,17 +22,15 @@ describe("Auth service", () => {
         localStorageService = _localStorageService_;
     }))
 
-    it("should initiate itself", () => {
-
-    })
-
     it("should initiate user and he exists", () => {
         localStorageService.set("User", clearUser);
+        console.log("USER", localStorageService.get("User"))
         const user = authService.initiateUser();
         expect(user).toEqual(clearUser);
     })
 
     it("should initiate user and he is not exist", () => {
+        console.log("USER 2", localStorageService.get("User"))
         const user = authService.initiateUser();
         expect(user).toEqual(new User({}));
     })

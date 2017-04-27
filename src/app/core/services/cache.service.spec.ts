@@ -11,7 +11,7 @@ describe("Cache Service", () => {
     const additionalKey = "newKey";
     const subObject = "subObject";
 
-    const faceConstants = {
+    const fakeConstants = {
         cacheID
     }
 
@@ -19,7 +19,7 @@ describe("Cache Service", () => {
     const secondTestObject = angular.copy(testObject);
 
     beforeEach(mock.module("app.core", ($provide) => {
-        $provide.constant("CoreConstants", faceConstants);
+        $provide.constant("CoreConstants", fakeConstants);
     }));
 
     afterEach(() => {

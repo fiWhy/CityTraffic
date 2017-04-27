@@ -6,9 +6,8 @@ import { AuthService } from "./services/auth.service";
 
 import { coreConstants } from "./core.constants";
 
-export const CoreModule:  ng.IModule = angular.module("app.core", [ 
-])
-    .service("CacheService", CacheService)
+export const CoreModule: ng.IModule = angular.module("app.core", [
+]).service("CacheService", CacheService)
     .service("NetworkService", NetworkService)
     .service("AuthService", AuthService)
     .constant("CoreConstants", coreConstants());

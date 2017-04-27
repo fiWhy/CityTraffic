@@ -2,18 +2,12 @@ import { loaders } from './webpack-loaders.config';
 import { webpackConfig } from './webpack.config';
 
 const karmaWebpackConf = () => {
-    // return {
-    //     rules: loaders,
-    //     devtool: 'inline-source-map'
-    // };
-    let webpackConfigCopy: any = Object.assign({
-        devtool: 'inline-source-map'
-    }, webpackConfig(true));
+    let webpackConfigObjeect: any = webpackConfig(true);
 
-    webpackConfigCopy.module.rules[0].use.unshift({
-        loader: 'istanbul-instrumenter-loader'
+    webpackConfigObjeect.module.rules[0].use.unshift({
+        loader: 'istanbul-instrumenter-loader', 
     })
 
-    return webpackConfigCopy;
+    return webpackConfigObjeect;
 }
 export const karmaWebpackConfig = karmaWebpackConf();
