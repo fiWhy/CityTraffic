@@ -33,7 +33,7 @@ export class NetworkService<T> {
                 .then((data: T) => this.cacheData(additional.cacheAlias || url, data))
                 .catch((err) => this.handleError(err));
         } else {
-            return this.$q.resolve(cachedData)
+            return this.$q.resolve(cachedData);
         }
     }
 

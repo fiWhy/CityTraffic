@@ -5,7 +5,7 @@ describe("Login Router", () => {
 
     let $state;
     
-    const state = "login";
+    const state = "app.login";
 
     beforeEach(inject((_$state_) => {
         $state = _$state_;

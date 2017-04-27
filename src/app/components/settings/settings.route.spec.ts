@@ -5,7 +5,7 @@ describe("Settings Router", () => {
 
     let $state;
     
-    const state = "settings";
+    const state = "app.settings";
 
     beforeEach(inject((_$state_) => {
         $state = _$state_;

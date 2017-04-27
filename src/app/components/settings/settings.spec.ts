@@ -8,7 +8,7 @@ describe("Settings Controller", () => {
     let currentState;
     let controller;
     
-    const state = "settings";
+    const state = "app.settings";
 
     beforeEach(inject((_$controller_, _$state_) => {
         $controller = _$controller_;

@@ -5,7 +5,7 @@ describe("Dashboard Router", () => {
 
     let $state;
     
-    const state = "dashboard";
+    const state = "app.dashboard";
 
     beforeEach(inject((_$state_) => {
         $state = _$state_;
@@ -13,6 +13,6 @@ describe("Dashboard Router", () => {
     
 
     it("Should check state changing", () => {
-        expect($state.href(state)).toEqual("#/");
+        expect($state.href(state)).toEqual("#/dashboard");
     })
 })

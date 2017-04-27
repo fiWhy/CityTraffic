@@ -8,7 +8,7 @@ describe("Login Controller", () => {
     let currentState;
     let controller;
     
-    const loginState = "login";
+    const loginState = "app.login";
 
     beforeEach(inject((_$controller_, _$state_) => {
         $controller = _$controller_;

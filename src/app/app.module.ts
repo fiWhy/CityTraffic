@@ -6,6 +6,8 @@ import { ComponentsModule } from "./components";
 /* Config */
 import { materialConfig, routesConfig } from "./config";
 
+import { routes } from "./app.route";
+
 angular.module("app", [
     "ui.router",
     "ngMaterial",
@@ -14,6 +16,7 @@ angular.module("app", [
     CoreModule.name,
     ComponentsModule.name,
 ])
+    .config(routes)
     .config(materialConfig)
     .config(routesConfig);
 

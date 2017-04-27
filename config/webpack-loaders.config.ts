@@ -27,16 +27,6 @@ export const loaders = (karma: boolean = false) => {
 
         },
         {
-            enforce: 'pre',
-            test: /\.js$/,
-            loader: "source-map-loader"
-        },
-        {
-            enforce: 'pre',
-            test: /\.ts?$/,
-            use: "source-map-loader"
-        },
-        {
             test: /\.(css|scss)$/,
             use: karma ? styleUseArray : ExtractTextPlugin.extract({
                 fallback: 'style-loader',

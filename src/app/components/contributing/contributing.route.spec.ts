@@ -5,7 +5,7 @@ describe("Contributing Router", () => {
 
     let $state;
     
-    const state = "contributing";
+    const state = "app.contributing";
 
     beforeEach(inject((_$state_) => {
         $state = _$state_;

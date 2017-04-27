@@ -8,7 +8,7 @@ describe("Contributing Controller", () => {
     let currentState;
     let controller;
     
-    const state = "contributing";
+    const state = "app.contributing";
 
     beforeEach(inject((_$controller_, _$state_) => {
         $controller = _$controller_;
