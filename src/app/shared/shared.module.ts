@@ -1,8 +1,8 @@
 import * as angular from "angular";
 
-import { NavBarDirective } from "./components";
+import { SharedComponentsModule } from "./components/shared-components.module";
 
 export const SharedModule: ng.IModule = angular.module("app.shared", [
-
-]).directive(NavBarDirective.id, () => new NavBarDirective);
+    SharedComponentsModule.name
+]);
 

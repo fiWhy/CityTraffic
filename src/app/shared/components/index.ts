@@ -1,1 +1,1 @@
-export * from "./nav-bar/nav-bar.directive";
+export * from "./nav-bar/nav-bar.module";

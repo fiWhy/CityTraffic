@@ -21,7 +21,9 @@ export const loaders = (karma: boolean = false) => {
             test: /\.ts$/,
             exclude: config.exclude,
             use: [
-                { loader: 'ts-loader' },
+                {
+                    loader: 'awesome-typescript-loader',
+                },
                 { loader: 'tslint-loader' }
             ]
 
