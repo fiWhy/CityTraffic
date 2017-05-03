@@ -1,4 +1,4 @@
-import { IMenuItem } from "./nav-bar.service.provider";
+import { IMenuItem } from "../providers/nav-bar.service.provider";
 
 export class NavBarServiceImplementation {
     private _menuItems: IMenuItem[] = [];
@@ -25,7 +25,7 @@ export class NavBarServiceImplementation {
     public deactivateAllMenuItems() {
         this._menuItems.forEach((item) => {
             item.active = false;
-        })
+        });
     }
 
     public setActiveMenuItem(menuItemName: string) {

@@ -1,4 +1,4 @@
-import { NavBar as NavBarController } from "./nav-bar";
+import { NavBar as NavBarController } from "./controllers/nav-bar";
 
 export const NavBarComponentName = "navBar";
 export const NavBar = {

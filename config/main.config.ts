@@ -1,4 +1,5 @@
 import { root } from "../lib/root";
+
 const configFnc = () => {
     const src = root("./src");
     const assets = root("./src", "assets");

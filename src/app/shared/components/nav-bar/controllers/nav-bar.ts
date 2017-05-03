@@ -1,5 +1,5 @@
-import { NavBarServiceImplementation as NavBarService } from "./nav-bar.service";
-import { IMenuItem } from "./nav-bar.service.provider";
+import { NavBarServiceImplementation as NavBarService } from "../services/nav-bar.service";
+import { IMenuItem } from "../providers/nav-bar.service.provider";
 
 export class NavBar implements ng.IController {
     private menuItems: IMenuItem[] = [];

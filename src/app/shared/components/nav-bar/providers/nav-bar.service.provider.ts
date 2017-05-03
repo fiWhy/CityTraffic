@@ -1,4 +1,4 @@
-import { NavBarServiceImplementation } from "./nav-bar.service";
+import { NavBarServiceImplementation } from "../services/nav-bar.service";
 
 export interface IMenuItem {
     sref: string;

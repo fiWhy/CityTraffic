@@ -1,2 +1,2 @@
-export * from "./nav-bar.service.provider";
-export { NavBarServiceImplementation as NavBarService } from "./nav-bar.service";
+export * from "./providers/nav-bar.service.provider";
+export { NavBarServiceImplementation as NavBarService } from "./services/nav-bar.service";
