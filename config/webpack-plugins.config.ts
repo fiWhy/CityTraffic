@@ -5,8 +5,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
 
-const webpackPluginsFnc = () => {
-    return [
+const webpackPluginsFnc = (karma: boolean = false): any => {
+    const plugins = [
         new webpack.SourceMapDevToolPlugin({
             filename: null, // if no value is provided the sourcemap is inlined
             test: /\.(ts|js)($|\?)/i // process .js and .ts files only
@@ -33,8 +33,17 @@ const webpackPluginsFnc = () => {
             out: config.docs,
             includeDeclarations: false,
             ignoreCompilerErrors: true,
-        }, './src/app')
-    ]
+        }, './src/app'),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html'
+        })
+    ];
+
+    if (!karma) {
+        return { plugins };
+    } else {
+        return {};
+    }
 };
 
-export const plugins = webpackPluginsFnc();
+export const plugins = webpackPluginsFnc;

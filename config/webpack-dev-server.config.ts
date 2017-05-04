@@ -7,4 +7,4 @@ const devServerConf = () => {
         inline: true,
     }
 }
-export const devServerConfig =  devServerConf();
+export const devServerConfig = devServerConf();
