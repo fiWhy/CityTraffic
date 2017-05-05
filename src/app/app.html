@@ -1,4 +1,18 @@
-<md-content class="md-padding">
-    <nav-bar></nav-bar>
-    <ui-view></ui-view>
+<md-content>
+    <header layout="column">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools">
+                <nav-bar></nav-bar>
+                <span flex></span>
+                <div flex="33">
+                    <md-button class="md-fab md-mini" aria-label="Authorize">
+                        <md-icon md-svg-icon="common:backspace" aria-label="backspace"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+        </md-toolbar>
+    </header>
+    <div class="wrapper">
+        <ui-view></ui-view>
+    </div>
 </md-content>

@@ -33,17 +33,17 @@ describe("Navbar service", () => {
         expect(navBarService.activeMenuItem).toEqual(testMenuItem);
     })
 
-    it("should change active menu element", () => {
+    it("should change active main-menu element", () => {
         navBarService.activeMenuItem = "test2";
         expect(navBarService.activeMenuItem).toEqual(anotherTestMenuItem);
     })
 
-     it("should unselect each menu item", () => {
+     it("should unselect each main-menu item", () => {
         navBarService.deactivateAllMenuItems();
         expect(navBarService.activeMenuItem).toBeUndefined();
      });
 
-     it("Should return all menu items", () => {
+     it("Should return all main-menu items", () => {
          expect(navBarService.fetchMenuItems()).toEqual(listOfMenuItems);
      })
 })

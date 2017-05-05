@@ -1,3 +1,5 @@
 node_modules
 docs
 coverage
+.idea
+src/app/config/firebase.config.ts

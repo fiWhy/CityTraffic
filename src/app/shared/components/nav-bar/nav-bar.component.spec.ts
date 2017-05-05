@@ -1,3 +1,3 @@
-describe("Navbar directive", () => {
+describe("Navbar component", () => {
 
 })
