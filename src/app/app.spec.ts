@@ -15,7 +15,9 @@ describe("App controller", () => {
         AppService = {
             connectFirebaseToScope($scope) {
                 console.log("Called");
-            }
+            },
+
+            authenticate() { }
         };
     })
     beforeEach(inject(($rootScope) => {

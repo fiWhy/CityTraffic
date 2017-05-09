@@ -13,7 +13,9 @@ firebase.initializeApp(firebaseConfig());
 
 import { TopBar, TopBarComponentName } from "./components";
 import { SideNav, SideNavComponentName } from "./components";
+
 import { AppService } from "./app.service";
+import { FirebaseAuthService } from "./services/firebase-auth.service";
 
 angular.module("app", [
     "ui.router",
@@ -29,6 +31,7 @@ angular.module("app", [
     .config(materialConfig)
     .config(routesConfig)
     .service(AppService.name, AppService)
+    .service(FirebaseAuthService.name, FirebaseAuthService)
     .component(TopBarComponentName, TopBar)
     .component(SideNavComponentName, SideNav);
 

@@ -4,7 +4,7 @@ import { AppService } from "./app.service";
 export class App {
     constructor(
         private $scope: ng.IScope,
-        private AppService: AppService,
+        private AppService: AppService
     ) {
         this.connectFirebaseToScope();
     }
@@ -16,9 +16,9 @@ export class App {
     private auth() {
         this.AppService.authenticate()
             .then((success) => {
-                console.log(success);
-            }).catch((error) => {
-                console.log(error);
-            });
+                console.log("Success", success);
+            }).catch((err) => {
+                console.log("Err", err);
+            })
     }
 }

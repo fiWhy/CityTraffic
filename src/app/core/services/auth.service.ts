@@ -1,11 +1,10 @@
 import { User } from "../entities/user";
 
-export interface IAuthProvider {
-
-}
+export interface IAuthProvider {}
 
 export interface IAuthResponse {
-
+    credential: any;
+    user: any;
 }
 
 export interface IAuthService {
