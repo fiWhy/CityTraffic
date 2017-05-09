@@ -13,9 +13,7 @@ export const webpackConfig = (karma: boolean = false) => {
         devtool: 'inline-source-map'
     };
 
-    const preparedPlugins = karma ? {} : {
-        plugins
-    };
+    const pluginsObject = plugins(karma);
     return Object.assign({
         module: {
             rules: loaders(karma),
@@ -28,5 +26,5 @@ export const webpackConfig = (karma: boolean = false) => {
         resolve: {
             extensions: config.extensions,
         },
-    }, preparedEntry, preparedPlugins);
+    }, preparedEntry, pluginsObject);
 };

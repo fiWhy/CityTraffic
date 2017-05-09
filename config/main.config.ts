@@ -22,7 +22,7 @@ const configFnc = () => {
     const extensions = [".ts", ".tsx", ".js", ".scss", ".json", "css"];
 
 
-    const serverPort = 8081;
+    const serverPort = 8181;
 
     const cssPath = "/static/сss/";
     const fontsPath = "/static/fonts";

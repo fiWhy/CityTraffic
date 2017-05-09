@@ -6,6 +6,7 @@ import * as webpack from "webpack";
 
 const task = () => {
     let compiler = webpack(webpackDevServerConfig);
+
     let server = new WebpackDevServer(compiler, {
         publicPath: "",
     });
