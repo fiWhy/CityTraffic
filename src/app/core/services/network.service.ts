@@ -1,5 +1,3 @@
-import { merge } from "angular";
-
 import { CacheService } from "./cache.service";
 import { AuthService } from "./auth.service";
 
@@ -82,7 +80,7 @@ export class NetworkService<T> {
     }
 
     private prepareOptions(options: any): any {
-        return merge(this.defaultOptions, options);
+        return Object.assign(this.defaultOptions, options);
     }
 
     private prepareAdditionalOptions(networkAdditionalOptions?: AdditionalOptions) {

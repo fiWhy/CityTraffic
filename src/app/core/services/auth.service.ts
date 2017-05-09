@@ -1,8 +1,20 @@
 import { User } from "../entities/user";
 
+export interface IAuthProvider {
+
+}
+
+export interface IAuthResponse {
+
+}
+
+export interface IAuthService {
+    (authProvider: IAuthProvider): Promise<IAuthResponse>;
+}
+
 export class AuthService {
     private user: User;
-    constructor(private localStorageService: ng.local.storage.ILocalStorageService) {
+    constructor(private localStorageService: ng.local.storage.ILocalStorageService, private CoreConstants: any) {
         this.user = this.initiateUser();
     }
 
@@ -24,6 +36,11 @@ export class AuthService {
         }
     }
 
+    login(service: IAuthService,
+        provider: IAuthProvider = this.CoreConstants.AUTH.PROVIDERS.DEFAULT,
+        data?: any): Promise<IAuthResponse> {
+        return service(provider);
+    }
 
     getUser() {
         return this.user;

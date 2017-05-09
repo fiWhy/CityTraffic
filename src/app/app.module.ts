@@ -8,11 +8,17 @@ import "./app.scss";
 /* Config */
 import { materialConfig, routesConfig, firebaseConfig } from "./config";
 import { routes } from "./app.route";
+
 firebase.initializeApp(firebaseConfig());
+
+import { TopBar, TopBarComponentName } from "./components";
+import { SideNav, SideNavComponentName } from "./components";
+import { AppService } from "./app.service";
 
 angular.module("app", [
     "ui.router",
     "ngMaterial",
+    "ngMdIcons",
     "firebase",
     "LocalStorageModule",
     SharedModule.name,
@@ -21,6 +27,9 @@ angular.module("app", [
 ])
     .config(routes)
     .config(materialConfig)
-    .config(routesConfig);
+    .config(routesConfig)
+    .service(AppService.name, AppService)
+    .component(TopBarComponentName, TopBar)
+    .component(SideNavComponentName, SideNav);
 
 angular.bootstrap(document.getElementById("app"), ["app"]);

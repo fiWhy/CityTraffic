@@ -1,18 +1,9 @@
-<md-content>
-    <header layout="column">
-        <md-toolbar class="md-hue-2">
-            <div class="md-toolbar-tools">
-                <nav-bar></nav-bar>
-                <span flex></span>
-                <div flex="33">
-                    <md-button class="md-fab md-mini" aria-label="Authorize">
-                        <md-icon md-svg-icon="common:backspace" aria-label="backspace"></md-icon>
-                    </md-button>
-                </div>
-            </div>
-        </md-toolbar>
-    </header>
-    <div class="wrapper">
+<md-toolbar class="md-hue-2">
+    <top-bar auth="App.auth()"></top-bar>
+</md-toolbar>
+<div class="wrapper" flex layout="row">
+    <side-nav></side-nav>
+    <md-content flex id="content">
         <ui-view></ui-view>
-    </div>
-</md-content>
+    </md-content>
+</div>

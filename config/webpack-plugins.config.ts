@@ -36,7 +36,8 @@ const webpackPluginsFnc = (karma: boolean = false): any => {
         }, './src/app'),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
-        })
+        }),
+        new CopyWebpackPlugin([ { from: 'src/app/assets', to: config.serveFilesPath } ])
     ];
 
     if (!karma) {

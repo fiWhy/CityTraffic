@@ -5,6 +5,7 @@ export const routes = ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider)
     $stateProvider.state("app", {
         abstract: true,
         controller: App,
+        controllerAs: App.name,
         template: require("./app.html"),
     });
 };

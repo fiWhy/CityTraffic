@@ -26,6 +26,7 @@ const configFnc = () => {
 
     const cssPath = "/static/сss/";
     const fontsPath = "/static/fonts";
+    const serveFilesPath = "assets";
 
     const htmls = [
         "index.html",
@@ -51,6 +52,7 @@ const configFnc = () => {
         extensions,
         srcRelative,
         distFileName,
+        serveFilesPath,
         assetsPathPattern,
     }
 }
