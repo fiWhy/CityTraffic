@@ -1,14 +1,8 @@
-import { User } from "../entities/user";
-
-export interface IAuthProvider {}
+import { User } from "../../entities/user";
 
 export interface IAuthResponse {
     credential: any;
     user: any;
-}
-
-export interface IAuthService {
-    (authProvider: IAuthProvider): Promise<IAuthResponse>;
 }
 
 export class AuthService {
@@ -33,12 +27,6 @@ export class AuthService {
             this.localStorageService.set("User", this.user);
             this.localStorageService.set("Token", this.user.token);
         }
-    }
-
-    login(service: IAuthService,
-        provider: IAuthProvider = this.CoreConstants.AUTH.PROVIDERS.DEFAULT,
-        data?: any): Promise<IAuthResponse> {
-        return service(provider);
     }
 
     getUser() {

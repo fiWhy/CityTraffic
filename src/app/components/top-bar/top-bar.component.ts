@@ -6,6 +6,8 @@ export const TopBar: ng.IComponentOptions = {
     controllerAs: TopBarController.name,
     bindings: {
         auth: "&",
+        signOut: "&",
+        user: "<",
     },
     template: require("./top-bar.html"),
 };

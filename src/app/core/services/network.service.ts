@@ -1,5 +1,5 @@
 import { CacheService } from "./cache.service";
-import { AuthService } from "./auth.service";
+import { AuthService } from "./auth/auth.service";
 
 import { AdditionalOptions } from "../entities/additional-options";
 

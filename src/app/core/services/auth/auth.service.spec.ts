@@ -1,6 +1,6 @@
 import { mock } from "angular";
 
-import { User } from "../entities";
+import { User } from "../../entities";
 
 describe("Auth service", () => {
     let authService;

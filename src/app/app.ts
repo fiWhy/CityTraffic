@@ -6,19 +6,18 @@ export class App {
         private $scope: ng.IScope,
         private AppService: AppService
     ) {
-        this.connectFirebaseToScope();
+        this.connectToServer();
     }
 
-    private connectFirebaseToScope() {
-        this.AppService.connectFirebaseToScope(this.$scope);
+    private connectToServer() {
+        this.AppService.connect(this.$scope);
     }
 
     private auth() {
-        this.AppService.authenticate()
-            .then((success) => {
-                console.log("Success", success);
-            }).catch((err) => {
-                console.log("Err", err);
-            })
+        this.AppService.authenticate();
+    }
+
+    private signOut() {
+        this.AppService.signOut();
     }
 }

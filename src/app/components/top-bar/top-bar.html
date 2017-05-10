@@ -5,8 +5,18 @@
     <nav-bar></nav-bar>
     <span flex></span>
     <div flex="33">
-        <md-button class="md-fab md-mini" ng-click="TopBar.auth()" aria-label="Authorize">
+        <span data-ng-if="TopBar.user" data-ng-bind="TopBar.user.username"></span>
+        <md-button data-ng-if="!TopBar.user" class="md-fab md-mini" ng-click="TopBar.auth()" aria-label="Authorize">
             <md-icon md-svg-icon="account-white" aria-label="backspace"></md-icon>
+
+        </md-button>
+
+        <md-button data-ng-if="TopBar.user" class="md-fab md-mini" ng-click="TopBar.auth()" aria-label="{{ TopBar.user.username }}">
+            <img data-ng-if="TopBar.user" class="md-icon-png" data-ng-src="{{ TopBar.user.image }}" alt="{{ TopBar.user.username }}">
+        </md-button>
+
+        <md-button data-ng-if="TopBar.user" class="md-fab md-mini" ng-click="TopBar.signOut()" aria-label="Logout">
+            <md-icon md-svg-icon="cancel-white" aria-label="Logout"></md-icon>
         </md-button>
     </div>
 </div>

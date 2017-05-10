@@ -1,43 +1,44 @@
-import { AuthService } from "./core/services/auth.service";
-import { FirebaseAuthService } from "./services/firebase-auth.service";
+import { AuthService } from "./core/services/auth/auth.service";
+import { IAuthProvider } from "./core/providers/auth-providers/auth-providers.factory";
+import { User } from "./core/entities/user";
 
 export class AppService {
-    public static $inject = ["$firebaseObject", "$firebaseAuth", "AuthService", "FirebaseAuthService", "$mdToast"];
+    public static $inject = ["AuthService", "AuthProvidersFactory", "$mdToast"];
     private authService: any;
     private provider: any;
-    constructor(private $firebaseObject: any,
-        private $firebaseAuth: any,
+    constructor(
         private AuthService: AuthService,
-        private FirebaseAuthService: FirebaseAuthService,
+        private AuthProvidersFactory: IAuthProvider,
         private $mdToast: ng.material.IToastService) {
-        this.authService = this.$firebaseAuth();
     }
 
-    public connectFirebaseToScope($scope: ng.IScope): void {
-        const ref = firebase.database().ref().child("data");
-        const syncObject = this.$firebaseObject(ref);
-        syncObject.$bindTo($scope, "data");
+    public connect($scope: ng.IScope): Promise<boolean> {
+        return this.AuthProvidersFactory.connect($scope);
     }
 
     public authenticate() {
-        const pinPosition = "top right";
-        return this.AuthService.login(this.authService.$signInWithPopup)
-            .then((result) => this.FirebaseAuthService.handleResponse(result), (err) => {
-                console.log(err);
-            })
+        const pinPosition = "bottom right";
+        return this.AuthProvidersFactory.authenticate()
             .then((data) => {
-                console.log(data);
                 this.$mdToast.show(
                     this.$mdToast.simple()
                         .position(pinPosition)
-                        .textContent(`Welcome, ${data.user.displayName}`)
-                )
+                        .textContent(`Welcome, ${data.username}`)
+                );
             }).catch((err) => {
                 this.$mdToast.show(
                     this.$mdToast.simple()
                         .position(pinPosition)
                         .textContent(err.message)
-                )
+                );
             });
+    }
+
+    signOut() {
+        return this.AuthProvidersFactory.signOut();
+    }
+
+    getUser(): User {
+        return this.AuthProvidersFactory.currentUser;
     }
 }
