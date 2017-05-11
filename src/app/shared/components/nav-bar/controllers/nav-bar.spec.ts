@@ -1,6 +1,8 @@
 import { mock, IControllerService } from "angular";
+import "angular-ui-router";
 
 describe("Navbar component", () => {
+    beforeEach(mock.module("ui.router"));
     beforeEach(mock.module("app.shared.components"));
 
     let $componentController;

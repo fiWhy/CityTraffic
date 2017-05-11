@@ -3,9 +3,9 @@
         <top-bar auth="App.auth()" sign-out="App.signOut()" user="App.AppService.getUser()"></top-bar>
     </md-toolbar>
     <div class="wrapper" flex layout="row">
-        <side-nav layout="row"></side-nav>
         <md-content flex id="content">
             <ui-view></ui-view>
         </md-content>
+        <side-nav layout="row"></side-nav>
     </div>
 </div>

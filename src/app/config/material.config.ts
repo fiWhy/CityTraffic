@@ -7,4 +7,5 @@ export const materialConfig = ($mdThemingProvider: ng.material.IThemingProvider,
     $mdIconProvider.icon("menu-white", require("../assets/svg/nav/menu-white.svg"), 24);
     $mdIconProvider.icon("account-white", require("../assets/svg/user/account-white.svg"), 24);
     $mdIconProvider.icon("cancel-white", require("../assets/svg/user/cancel-white.svg"), 24);
+    $mdIconProvider.icon("settings-white", require("../assets/svg/user/settings-white.svg"), 24);
 };

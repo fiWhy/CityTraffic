@@ -1,5 +1,5 @@
 <md-nav-bar data-ng-if="NavBar.menuItems.length" md-selected-nav-item="NavBar.NavBarService.activeMenuItem" nav-bar-aria-label="navigation links">
-    <md-nav-item data-ng-repeat="item in NavBar.menuItems" md-nav-click="goto(item.sref)" name="{{ item.name }}">
+    <md-nav-item data-ng-repeat="item in NavBar.menuItems" md-nav-click="NavBar.goTo(item.sref)" name="{{ item.name }}">
         {{ item.title }}
     </md-nav-item>
 </md-nav-bar>
