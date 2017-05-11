@@ -2,7 +2,7 @@ import { User, Options, AdditionalOptions } from ".";
 
 describe("Entity", () => {
     it("user should initiating in correct way", () => {
-        const testObject = { username: "test", password: "test", token: "test" };
+        const testObject = { id: 1, username: "test", email: "test@gmail.com", image: "fake.png", token: "test", additionalInfo: {} };
         const user = new User(testObject);
         expect(JSON.stringify(user)).toEqual(JSON.stringify(testObject));
     })

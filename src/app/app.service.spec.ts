@@ -14,6 +14,10 @@ describe("App service", () => {
 
     beforeEach(mock.module("app"));
     beforeEach(mock.module({
+        AuthProvidersFactory: {
+            connect() { },
+            authenticate() { }
+        },
         $firebaseObject: () => ({
             $bindTo() { }
         }),
@@ -35,7 +39,7 @@ describe("App service", () => {
                 })
             }),
             auth: {
-                GoogleAuthProvider: function() {}
+                GoogleAuthProvider: function () { }
             }
         };
         $firebase = () => ({
@@ -51,9 +55,9 @@ describe("App service", () => {
         expect(AppService).toBeDefined();
     })
 
-    it("should initiate connect to firebase", () => {
-        let spied = spy(AppService, "connectFirebaseToScope");
-        AppService.connectFirebaseToScope($firebase, $scope);
+    it("should initiate connect to server", () => {
+        let spied = spy(AppService, "connect");
+        AppService.connect($scope);
         expect(spied.calledOnce).toBeTruthy();
     })
 })

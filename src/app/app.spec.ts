@@ -13,7 +13,7 @@ describe("App controller", () => {
     beforeEach(mock.module("app"));
     beforeEach(() => {
         AppService = {
-            connectFirebaseToScope($scope) {
+            connect($scope) {
                 console.log("Called");
             },
 
