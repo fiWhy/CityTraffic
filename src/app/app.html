@@ -1,9 +1,11 @@
-<md-toolbar class="md-hue-2">
-    <top-bar auth="App.auth()" sign-out="App.signOut()" user="App.AppService.getUser()"></top-bar>
-</md-toolbar>
-<div class="wrapper" flex layout="row">
-    <side-nav></side-nav>
-    <md-content flex id="content">
-        <ui-view></ui-view>
-    </md-content>
+<div flex layout="column">
+    <md-toolbar class="md-hue-2">
+        <top-bar auth="App.auth()" sign-out="App.signOut()" user="App.AppService.getUser()"></top-bar>
+    </md-toolbar>
+    <div class="wrapper" flex layout="row">
+        <side-nav layout="row"></side-nav>
+        <md-content flex id="content">
+            <ui-view></ui-view>
+        </md-content>
+    </div>
 </div>
