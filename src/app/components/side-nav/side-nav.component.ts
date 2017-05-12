@@ -6,5 +6,8 @@ export const SideNavComponentName = "sideNav";
 export const SideNav: ng.IComponentOptions = {
     controller: SideNavController,
     controllerAs: SideNavController.name,
-    template: require("./side-nav.html")
+    template: require("./side-nav.html"),
+    bindings: {
+        componentId: "@",
+    }
 };

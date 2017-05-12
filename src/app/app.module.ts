@@ -11,8 +11,7 @@ import { routes } from "./app.route";
 
 firebase.initializeApp(firebaseConfig());
 
-import { TopBar, TopBarComponentName } from "./components";
-import { SideNav, SideNavComponentName } from "./components";
+import { TopBar, TopBarComponentName, SideNav, SideNavComponentName } from "./components";
 
 import { AppService } from "./app.service";
 
@@ -22,6 +21,7 @@ angular.module("app", [
     "ngMdIcons",
     "firebase",
     "LocalStorageModule",
+    "ngMap",
     SharedModule.name,
     CoreModule.name,
     StatesModule.name,
@@ -31,6 +31,6 @@ angular.module("app", [
     .config(routesConfig)
     .service(AppService.name, AppService)
     .component(TopBarComponentName, TopBar)
-    .component(SideNavComponentName, SideNav);
+    .component(SideNavComponentName, SideNav)
 
 angular.bootstrap(document.getElementById("app"), ["app"]);

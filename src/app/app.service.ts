@@ -9,7 +9,8 @@ export class AppService {
     constructor(
         private AuthService: AuthService,
         private AuthProvidersFactory: IAuthProvider,
-        private $mdToast: ng.material.IToastService) {
+        private $mdToast: ng.material.IToastService,
+        private CoreConstants) {
     }
 
     public connect($scope: ng.IScope): Promise<boolean> {
@@ -17,7 +18,7 @@ export class AppService {
     }
 
     public authenticate() {
-        const pinPosition = "bottom right";
+        const pinPosition = this.CoreConstants.MAIN_TOAST_POSITION;
         return this.AuthProvidersFactory.authenticate()
             .then((data) => {
                 this.$mdToast.show(

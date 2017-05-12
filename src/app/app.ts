@@ -2,9 +2,11 @@ import * as firebase from "firebase";
 import { AppService } from "./app.service";
 
 export class App {
+    private leftSideNavId: string = "leftNav";
     constructor(
         private $scope: ng.IScope,
-        private AppService: AppService
+        private AppService: AppService,
+        private KeyConstants,
     ) {
         this.connectToServer();
     }

@@ -8,6 +8,7 @@ export const TopBar: ng.IComponentOptions = {
         auth: "&",
         signOut: "&",
         user: "<",
+        leftSideNavId: "@",
     },
     template: require("./top-bar.html"),
 };

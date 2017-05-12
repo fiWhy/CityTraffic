@@ -1,11 +1,12 @@
 <div flex layout="column">
     <md-toolbar class="md-hue-2">
-        <top-bar auth="App.auth()" sign-out="App.signOut()" user="App.AppService.getUser()"></top-bar>
+        <top-bar left-side-nav-id="{{ App.leftSideNavId }}" auth="App.auth()" sign-out="App.signOut()" user="App.AppService.getUser()"></top-bar>
     </md-toolbar>
-    <div class="wrapper" flex layout="row">
-        <md-content flex id="content">
-            <ui-view></ui-view>
+    <div class="wrapper" flex layout="row"
+         map-lazy-load="https://maps.google.com/maps/api/js?key={{ App.KeyConstants.GOOGLE_MAP.API_KEY }}">
+        <side-nav component-id="{{ App.leftSideNavId }}" layout="row"></side-nav>
+        <md-content flex layout="row" id="content">
+            <ui-view flex layout="row"></ui-view>
         </md-content>
-        <side-nav layout="row"></side-nav>
     </div>
 </div>
