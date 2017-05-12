@@ -1,4 +1,5 @@
 export class TrafficMap {
+    private defaultZoom: number = 17;
     constructor(private NgMap,
         private $mdToast: ng.material.IToastService,
         private CoreConstants,
@@ -28,6 +29,7 @@ export class TrafficMap {
         const preparedCoordinate = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
         this.NgMap.getMap().then((map) => {
             map.setCenter(preparedCoordinate);
+            map.setZoom(this.defaultZoom);
         })
         return preparedCoordinate;
     }
