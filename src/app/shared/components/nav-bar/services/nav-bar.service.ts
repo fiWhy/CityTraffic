@@ -8,7 +8,9 @@ export class NavBarServiceImplementation {
     }
 
     public fetchMenuItems(): IMenuItem[] {
-        return this._menuItems;
+        return this._menuItems.sort((prev, next) => {
+              return prev.order - next.order;
+        });
     }
 
     public get activeMenuItem(): IMenuItem {

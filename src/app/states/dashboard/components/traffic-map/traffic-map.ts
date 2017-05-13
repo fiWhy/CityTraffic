@@ -1,11 +1,19 @@
 export class TrafficMap {
     private defaultZoom: number = 17;
+    private defaultCenter: google.maps.LatLng;
     constructor(private NgMap,
         private $mdToast: ng.material.IToastService,
         private CoreConstants,
         private $q: ng.IQService) {
         this.tryingToSetCenterAndNotifyPosition();
     }
+
+    public backToCenter() {
+        this.NgMap.getMap().then((map) => {
+            map.setCenter(this.defaultCenter);
+        })
+    }
+
     private tryingToSetCenterAndNotifyPosition() {
         this.getCurrentCoordinates()
             .then((pos) => this.setCenter(pos))
@@ -27,6 +35,7 @@ export class TrafficMap {
 
     private setCenter(pos: Position): google.maps.LatLng {
         const preparedCoordinate = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+        this.defaultCenter = preparedCoordinate;
         this.NgMap.getMap().then((map) => {
             map.setCenter(preparedCoordinate);
             map.setZoom(this.defaultZoom);

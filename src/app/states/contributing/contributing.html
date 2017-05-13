@@ -1,1 +1,16 @@
-Contributing
+<md-content flex layout-padding>
+    <form name="contributing" ng-submit="contributing.$valid && Contributing.contribute()">
+        <div>                    
+            <md-button class="md-fab md-mini" aria-label="Find on map">
+                <md-icon md-svg-src="room-white"></md-icon>
+            </md-button>
+
+            <md-google-autocomplete 
+                                    place-change="Contributing.startPointChanged(place)" 
+                                    required="true" 
+                                    ng-model="Contributing.contributeFormData.startPoint" 
+                                    class="md-block" 
+                                    placeholder="Start point"></md-google-autocomplete>
+        </div>
+    </form>
+</md-content>

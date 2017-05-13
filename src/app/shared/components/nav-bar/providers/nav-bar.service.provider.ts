@@ -5,6 +5,7 @@ export interface IMenuItem {
     title: string;
     name: string;
     active: boolean;
+    order?: number;
 }
 
 export class NavBarServiceProvider implements ng.IServiceProvider {

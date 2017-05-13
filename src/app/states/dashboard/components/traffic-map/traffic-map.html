@@ -1,2 +1,8 @@
 <ng-map center="41,-87" zoom="3" style="width: 100%; height: 100%;">
 </ng-map>
+<md-button class="md-fab md-fab-bottom-right" ng-if="TrafficMap.defaultCenter" ng-click="TrafficMap.backToCenter()" ;>
+    <md-icon md-svg-icon="room-white"></md-icon>
+    <md-tooltip>
+        Back to center
+    </md-tooltip>
+</md-button>

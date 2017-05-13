@@ -22,7 +22,7 @@ describe("App controller", () => {
     })
     beforeEach(inject(($rootScope) => {
         $scope = $rootScope.$new();
-        controller = new App($scope, AppService, {});
+        controller = new App($scope, AppService, {}, {});
     }));
 
     it("should initiate itself", () => {

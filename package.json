@@ -27,6 +27,7 @@
     "@types/angular-material": "^1.1.49",
     "@types/angular-mocks": "^1.5.9",
     "@types/angular-ui-router": "^1.1.36",
+    "@types/google-maps": "^3.2.0",
     "@types/jasmine": "2.5.41",
     "@types/karma": "^0.13.35",
     "@types/lodash": "ts2.0",

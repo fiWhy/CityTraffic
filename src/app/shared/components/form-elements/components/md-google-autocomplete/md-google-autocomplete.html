@@ -1,0 +1,15 @@
+<md-autocomplete
+          ng-disabled="MdGoogleAutocomplete.isDisabled"
+          md-no-cache="MdGoogleAutocomplete.noCache"
+          md-selected-item="MdGoogleAutocomplete.selectedItem"
+          md-search-text="MdGoogleAutocomplete.searchText"
+          md-selected-item-change="MdGoogleAutocomplete.selectedItemChange()"
+          md-items="item in MdGoogleAutocomplete.getQueryResults()"
+          md-item-text="item.description"
+          md-min-length="0"
+          ng-required="MdGoogleAutocomplete.required"
+          placeholder="{{ MdGoogleAutocomplete.placeholder }}">
+        <md-item-template ng-if="item.place_id">
+          <span md-highlight-text="MdGoogleAutocomplete.searchText" md-highlight-flags="^i">{{item.description}}</span>
+        </md-item-template>
+      </md-autocomplete>

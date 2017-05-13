@@ -1,8 +1,5 @@
-export const coreConstants = () => ({
-    "GOOGLE_CONSTANTS": {
+export const keyConstants = () => ({
+    "GOOGLE_MAP": {
         "API_KEY": "---key---"
-    },
-    "GOOGLE_GEOLOCATION": {
-        API_KEY: "---key---",
     },
 });

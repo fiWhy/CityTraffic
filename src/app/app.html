@@ -3,7 +3,7 @@
         <top-bar left-side-nav-id="{{ App.leftSideNavId }}" auth="App.auth()" sign-out="App.signOut()" user="App.AppService.getUser()"></top-bar>
     </md-toolbar>
     <div class="wrapper" flex layout="row"
-         map-lazy-load="https://maps.google.com/maps/api/js?key={{ App.KeyConstants.GOOGLE_MAP.API_KEY }}">
+         map-lazy-load="{{App.CoreConstants.GOOGLE_MAP.LINK}}?key={{App.KeyConstants.GOOGLE_MAP.API_KEY}}&libraries={{App.CoreConstants.GOOGLE_MAP.OPTIONS.LIBS.join(',')}}">
         <side-nav component-id="{{ App.leftSideNavId }}" layout="row"></side-nav>
         <md-content flex layout="row" id="content">
             <ui-view flex layout="row"></ui-view>
