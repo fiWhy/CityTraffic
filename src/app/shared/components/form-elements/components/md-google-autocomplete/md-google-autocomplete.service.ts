@@ -24,7 +24,7 @@ export class MdGoogleAutocompleteService {
         return defer.promise;
     }
 
-    public getLatLng(placeId: string) {
+    public getLatLng(placeId: string): ng.IPromise<google.maps.GeocoderResult> {
         const defer = this.$q.defer();
         this.geocoderService.geocode({
             placeId

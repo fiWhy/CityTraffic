@@ -10,6 +10,7 @@ export const MdGoogleAutocomplete: ng.IComponentOptions = {
         placeholder: "@",
         isDisabled: "<",
         noCache: "<",
+        visibleModel: "=",
         ngModel: "=",
         placeChange: "&",
         required: "=",

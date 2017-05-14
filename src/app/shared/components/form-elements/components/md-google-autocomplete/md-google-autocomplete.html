@@ -1,11 +1,11 @@
 <md-autocomplete
           ng-disabled="MdGoogleAutocomplete.isDisabled"
           md-no-cache="MdGoogleAutocomplete.noCache"
-          md-selected-item="MdGoogleAutocomplete.selectedItem"
+          md-selected-item="MdGoogleAutocomplete.ngModel"
           md-search-text="MdGoogleAutocomplete.searchText"
           md-selected-item-change="MdGoogleAutocomplete.selectedItemChange()"
           md-items="item in MdGoogleAutocomplete.getQueryResults()"
-          md-item-text="item.description"
+          md-item-text="item.formatted_address"
           md-min-length="0"
           ng-required="MdGoogleAutocomplete.required"
           placeholder="{{ MdGoogleAutocomplete.placeholder }}">

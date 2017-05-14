@@ -7,4 +7,7 @@ export const TrafficMap: ng.IComponentOptions = {
     controller: TrafficMapController,
     controllerAs: TrafficMapController.name,
     template: require("./traffic-map.html"),
+    bindings: {
+        zoom: "="
+    }
 };

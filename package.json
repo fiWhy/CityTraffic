@@ -20,6 +20,7 @@
     "angular-ui-router": "^0.4.2",
     "angularfire": "^2.3.0",
     "firebase": "3.3.0",
+    "lodash": "^4.17.4",
     "ngmap": "^1.18.4"
   },
   "devDependencies": {
@@ -30,7 +31,7 @@
     "@types/google-maps": "^3.2.0",
     "@types/jasmine": "2.5.41",
     "@types/karma": "^0.13.35",
-    "@types/lodash": "ts2.0",
+    "@types/lodash": "^4.14.50",
     "@types/ngmap": "^1.17.2",
     "@types/node": "^7.0.13",
     "@types/sinon": "^2.1.3",
