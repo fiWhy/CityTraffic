@@ -11,7 +11,6 @@ export class Contributing {
         private AuthProvider: IAuthProvider,
         private RequestProvider: IRequestProvider<any>,
         private GeoService: GeoService) {
-        this.currentLocation = this.AuthProvider.currentUser.location;
     }
 
     public contribute() {
