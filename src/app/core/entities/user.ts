@@ -18,7 +18,7 @@ export class User {
         this.token = user.token || null;
         this.additionalInfo = user.additionalInfo || null;
         this.lastLogin = user.lastLogin || new Date();
-        this.location = user.location || null;
+        this.location =  user.location? new google.maps.LatLng(user.location.lat, user.location.lng): null;
         this.online = user.online || false;
     }
 }

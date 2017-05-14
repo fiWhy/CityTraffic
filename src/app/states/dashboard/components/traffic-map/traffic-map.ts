@@ -17,8 +17,8 @@ export class TrafficMap {
     }
 
     private setWatchers() {
-        this.$scope.$watch("TrafficMap.center", (oldVal: google.maps.LatLng, newVal: google.maps.LatLng) => this.backToCenter(newVal));
-        this.$scope.$watch("TrafficMap.zoom", (oldVal: number, newVal: number) => this.backToZoom(newVal));
+        this.$scope.$watch("TrafficMap.center", (val: google.maps.LatLng) => this.backToCenter(val));
+        this.$scope.$watch("TrafficMap.zoom", (val: number) => this.backToZoom(val));
     }
 
     private getCurrentCoordinates(): google.maps.LatLng {

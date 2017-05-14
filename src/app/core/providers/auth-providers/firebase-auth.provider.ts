@@ -13,7 +13,10 @@ export class FirebaseAuthProvider implements IAuthProvider {
     private auth: any;
     private firebaseRef: any;
     private firebaseUserArrayRef: any;
-    constructor(private $firebaseObject, private $firebaseArray, private $firebaseAuth, private FirebaseRequestProvider: FirebaseRequestProvider<User>) {
+    constructor(private $firebaseObject,
+        private $firebaseArray,
+        private $firebaseAuth,
+        private FirebaseRequestProvider: FirebaseRequestProvider<User>) {
         this.auth = this.$firebaseAuth();
         this.registerListeners();
         this.firebaseRef = this.prepareFirebaseRef();
@@ -32,7 +35,7 @@ export class FirebaseAuthProvider implements IAuthProvider {
         return this.auth.$signInWithPopup(authProvider)
             .then((result: IFirebaseAuthResponse) => {
                 if (result.credential) {
-                    const user = this.createUserInFirebase(result.user);
+                    const user = this.createOrUpdateUserInFirebase(result.user);
                     return user;
                 } else {
                     throw result;
@@ -61,12 +64,17 @@ export class FirebaseAuthProvider implements IAuthProvider {
         return firebase.database().ref();
     }
 
-    private createUserInFirebase(user: firebase.UserInfo) {
+    private createOrUpdateUserInFirebase(user: firebase.UserInfo) {
         const userRef = this.$firebaseObject(this.firebaseRef.child("users"));
-        const preparedUser = new User(this.prepareUser(user));
-        userRef[preparedUser.providerId] = preparedUser;
-        userRef.$save();
-        return preparedUser;
+        this.getUserFromFirebase(user.uid).then((fbUser: User) => {
+            const preparedUser = new User(this.prepareUser(user));
+            if (!fbUser) {
+                userRef[preparedUser.providerId] = preparedUser;
+                userRef.$save();
+            }
+            return preparedUser;
+        })
+
     }
 
     private registerListeners() {
@@ -89,15 +97,18 @@ export class FirebaseAuthProvider implements IAuthProvider {
     private getUserFromFirebase(uid: string): Promise<User> {
         return this.firebaseUserArrayRef.$loaded().then((data) => {
             const record = data.$getRecord(uid);
-            this.FirebaseRequestProvider.patch(`users/${uid}`, {
-                lastLogin: new Date(),
-            })
+            if (record) {
+                this.FirebaseRequestProvider.patch(`users/${uid}`, {
+                    lastLogin: new Date(),
+                })
+            }
             return record;
         });
     }
 
     private prepareUser(user: firebase.UserInfo) {
         return {
+            id: user.uid,
             providerId: user.uid,
             image: user.photoURL,
             email: user.email,

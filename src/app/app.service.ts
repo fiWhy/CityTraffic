@@ -24,9 +24,12 @@ export class AppService {
         const pinPosition = this.CoreConstants.MAIN_TOAST_POSITION;
         this.GeoService.getCurrentCoordinates()
             .then((pos: Position) => {
-                this.RequestProvider.patch(`user/${this.AuthProvider.currentUser.id}`, {
-                    location: this.GeoService.positionToLatLng(pos)
-                })
+                const latLng = this.GeoService.positionToLatLng(pos);
+                const updates = {
+                    location: { lat: latLng.lat(), lng: latLng.lng() },
+                };
+                this.RequestProvider.patch(`users/${this.AuthProvider.currentUser.id}`, updates)
+                Object.assign(this.AuthProvider.currentUser, updates);
             }).catch((err) => {
                 this.$mdToast.show(
                     this.$mdToast.simple()

@@ -37,6 +37,10 @@ export class GeoService {
         })
     }
 
+    public genLatLng(lat: number, lng: number): google.maps.LatLng {
+        return new google.maps.LatLng(lat, lng);
+    }
+
     public positionToLatLng(pos: Position): google.maps.LatLng {
         return new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
     }
@@ -46,7 +50,7 @@ export class GeoService {
     }
 
     private chooseLocationByType(results: google.maps.GeocoderResult[], types: string[]) {
-        if(types) {
+        if (types) {
             return _.filter<google.maps.GeocoderResult>(results, (result) => {
                 return _.isEqual(result.types, types);
             })
