@@ -1,28 +1,19 @@
 import { GeoService } from "../../../../core/services/geo.service";
+import { IAuthProvider } from "../../../../core/providers";
 
 export class TrafficMap {
-    static $inject = ["NgMap", "$mdToast", "CoreConstants", "GeoService", "$q", "$scope"];
+    static $inject = ["NgMap", "$mdToast", "CoreConstants", "GeoService", "AuthProvider", "$q", "$scope"];
     private zoom: number;
     private center: google.maps.LatLng;
     private defaultZoom: number = 10;
-    private defaultCenter: google.maps.LatLng;
     constructor(private NgMap,
         private $mdToast: ng.material.IToastService,
         private CoreConstants,
         private GeoService: GeoService,
+        private AuthProvider: IAuthProvider,
         private $q: ng.IQService,
         private $scope: ng.IScope) {
-        this.tryingToSetCenterAndNotifyPosition();
         this.setWatchers();
-    }
-
-    private tryingToSetCenterAndNotifyPosition() {
-        this.getCurrentCoordinates()
-            .then((pos) => this.setCenter(pos))
-            .then((latLng) => this.notifyAboutUsersPosition(latLng))
-            .catch((err) => {
-                this.notify(err);
-            });
     }
 
     private setWatchers() {
@@ -30,24 +21,26 @@ export class TrafficMap {
         this.$scope.$watch("TrafficMap.zoom", (oldVal: number, newVal: number) => this.backToZoom(newVal));
     }
 
-    private getCurrentCoordinates(): ng.IPromise<Position> {
-        return this.GeoService.getCurrentCoordinates();
+    private getCurrentCoordinates(): google.maps.LatLng {
+        return this.AuthProvider.currentUser.location;
     }
 
-    private setCenter(pos: Position): google.maps.LatLng {
-        const preparedCoordinate = this.GeoService.positionToLatLng(pos);
-        this.defaultCenter = preparedCoordinate;
+    private setCenter(pos: google.maps.LatLng): void {
         this.NgMap.getMap().then((map) => {
-            this.backToCenter(preparedCoordinate);
+            this.backToCenter(pos);
             this.backToZoom(this.zoom || this.defaultZoom);
         })
-        return preparedCoordinate;
     }
 
-    private backToCenter(center?: google.maps.LatLng) {
-        this.NgMap.getMap().then((map) => {
-            map.setCenter(center || this.defaultCenter);
-        })
+    private backToCenter(center: google.maps.LatLng) {
+        if (center) {
+            this.notifyAboutUsersPosition(center)
+            this.NgMap.getMap().then((map) => {
+                map.setCenter(center);
+            })
+        } else {
+            this.notify("Please set your current coordinates first");
+        }
     }
 
     private backToZoom(zoom: number) {

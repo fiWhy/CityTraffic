@@ -14,6 +14,13 @@
             <img data-ng-if="TopBar.user" class="md-icon-png" data-ng-src="{{ TopBar.user.image }}" alt="{{ TopBar.user.username }}">
         </md-button>
 
+        <md-button data-ng-if="TopBar.user" class="md-icon-button" aria-label="Settings" ng-click="TopBar.findCoordinates()">
+            <md-icon md-svg-icon="room-white"></md-icon>
+            <md-tooltip>
+                Find coordinates
+            </md-tooltip>
+        </md-button>
+
         <md-button data-ng-if="TopBar.user" class="md-icon-button" ng-click="TopBar.signOut()" aria-label="Logout">
             <md-icon md-svg-icon="cancel-white"></md-icon>
             <md-tooltip>

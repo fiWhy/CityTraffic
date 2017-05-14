@@ -7,6 +7,7 @@ export const TopBar: ng.IComponentOptions = {
     bindings: {
         auth: "&",
         signOut: "&",
+        findCoordinates: "&",
         user: "<",
         leftSideNavId: "@",
     },

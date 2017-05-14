@@ -1,4 +1,5 @@
 <md-content flex layout-padding>
+    {{ Contributing.currentLocation }}
     <form name="contributing" ng-submit="contributing.$valid && Contributing.contribute()">
         <div flex layout="row">
             <md-time-picker flex ng-model="Contributing.contributeFormData.startTime" md-placeholder="Day starting"></md-datepicker>

@@ -1,10 +1,17 @@
 import { ContributingService } from "./contributing.service";
 import { IRequestProvider } from "../../core/providers";
+import { IAuthProvider } from "../../core/providers";
+import { GeoService } from "../../core/services/geo.service";
 
 export class Contributing {
-    static $inject = ["ContributingService", "RequestProvider"];
+    static $inject = ["ContributingService", "AuthProvider", "RequestProvider", "GeoService"];
     public contributeFormData: any = { additional: [] };
-    constructor(private ContributingService: ContributingService, private RequestProvider: IRequestProvider<any>) {
+    public currentLocation: google.maps.LatLng;
+    constructor(private ContributingService: ContributingService,
+        private AuthProvider: IAuthProvider,
+        private RequestProvider: IRequestProvider<any>,
+        private GeoService: GeoService) {
+        this.currentLocation = this.AuthProvider.currentUser.location;
     }
 
     public contribute() {

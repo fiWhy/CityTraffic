@@ -4,6 +4,7 @@ import { AuthProvidersFactory } from "./auth-providers.factory";
 
 import { FirebaseAuthProvider } from "./firebase-auth.provider";
 
+export { IAuthProvider } from "./auth-providers.factory";
 
 export const AuthProvidersModule = angular.module("app.core.providers.auth-providers", [
 

@@ -10,7 +10,7 @@ export interface IRequestProvider<T> {
     post(url: string, data: any): Promise<T | T[]>;
     patch(url: string, data: any): Promise<T | T[]>;
     put(url: string, data: any): Promise<T | T[]>;
-    delete(url: string): Promise<T | T[]>;
+    delete(url: string): Promise<void>;
 }
 
 export class RequestProvidersFactory {

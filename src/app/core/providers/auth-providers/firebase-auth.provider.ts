@@ -1,24 +1,29 @@
 import { IAuthResponse, IAuthProvider } from "./auth-providers.factory";
 import { User } from "../../entities/user";
+import { FirebaseRequestProvider } from "../request-providers/firebase-request.provider";
 
 export interface IFirebaseAuthResponse extends IAuthResponse {
     user: firebase.UserInfo;
 }
 
 export class FirebaseAuthProvider implements IAuthProvider {
-    static $inject = ["$firebaseObject", "$firebaseAuth"];
+    static $inject = ["$firebaseObject", "$firebaseArray", "$firebaseAuth", "FirebaseRequestProvider"];
     public currentUser: User;
     public status: boolean = false;
     private auth: any;
-    constructor(private $firebaseObject, private $firebaseAuth) {
+    private firebaseRef: any;
+    private firebaseUserArrayRef: any;
+    constructor(private $firebaseObject, private $firebaseArray, private $firebaseAuth, private FirebaseRequestProvider: FirebaseRequestProvider<User>) {
         this.auth = this.$firebaseAuth();
         this.registerListeners();
+        this.firebaseRef = this.prepareFirebaseRef();
+        this.firebaseUserArrayRef = this.$firebaseArray(this.firebaseRef.child("users"));
     }
 
     connect($scope: ng.IScope): Promise<boolean> {
-        const ref = firebase.database().ref().child("data");
+        const ref = this.firebaseRef;
         const syncObject = this.$firebaseObject(ref);
-        syncObject.$bindTo($scope, "data");
+        syncObject.$bindTo($scope, "firebase");
         return Promise.resolve(true);
     }
 
@@ -27,7 +32,8 @@ export class FirebaseAuthProvider implements IAuthProvider {
         return this.auth.$signInWithPopup(authProvider)
             .then((result: IFirebaseAuthResponse) => {
                 if (result.credential) {
-                    return this.prepareUser(result.user);
+                    const user = this.createUserInFirebase(result.user);
+                    return user;
                 } else {
                     throw result;
                 }
@@ -35,7 +41,12 @@ export class FirebaseAuthProvider implements IAuthProvider {
     }
 
     signOut(): Promise<any> {
-        return this.auth.$signOut();
+        const uid = this.currentUser.providerId;
+        return this.FirebaseRequestProvider.patch(`users/${uid}`, {
+            online: false
+        }).then(() => {
+            this.auth.$signOut();
+        });
     }
 
     getUser(): User {
@@ -46,12 +57,28 @@ export class FirebaseAuthProvider implements IAuthProvider {
         return this.status;
     }
 
+    private prepareFirebaseRef() {
+        return firebase.database().ref();
+    }
+
+    private createUserInFirebase(user: firebase.UserInfo) {
+        const userRef = this.$firebaseObject(this.firebaseRef.child("users"));
+        const preparedUser = new User(this.prepareUser(user));
+        userRef[preparedUser.providerId] = preparedUser;
+        userRef.$save();
+        return preparedUser;
+    }
 
     private registerListeners() {
         this.auth.$onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
-                this.currentUser = this.prepareUser(firebaseUser);
-                this.status = true;
+                this.getUserFromFirebase(firebaseUser.uid).then((user: User) => {
+                    this.FirebaseRequestProvider.patch(`users/${firebaseUser.uid}`, {
+                        online: true
+                    });
+                    this.currentUser = new User(user);
+                    this.status = true;
+                });
             } else {
                 this.currentUser = null;
                 this.status = false;
@@ -59,16 +86,22 @@ export class FirebaseAuthProvider implements IAuthProvider {
         });
     }
 
-    private prepareUser(user: firebase.UserInfo): User {
-        if (!user) {
-            return undefined;
-        } else {
-            return new User({
-                username: user.displayName,
-                email: user.email,
-                id: user.uid,
-                image: user.photoURL
-            });
-        }
+    private getUserFromFirebase(uid: string): Promise<User> {
+        return this.firebaseUserArrayRef.$loaded().then((data) => {
+            const record = data.$getRecord(uid);
+            this.FirebaseRequestProvider.patch(`users/${uid}`, {
+                lastLogin: new Date(),
+            })
+            return record;
+        });
+    }
+
+    private prepareUser(user: firebase.UserInfo) {
+        return {
+            providerId: user.uid,
+            image: user.photoURL,
+            email: user.email,
+            username: user.displayName,
+        };
     }
 }
