@@ -1,14 +1,14 @@
 import { ContributingService } from "./contributing.service";
-
-
+import { IRequestProvider } from "../../core/providers";
 
 export class Contributing {
-    static $inject = ["ContributingService"];
+    static $inject = ["ContributingService", "RequestProvider"];
     public contributeFormData: any = { additional: [] };
-    constructor(private ContributingService: ContributingService) {
+    constructor(private ContributingService: ContributingService, private RequestProvider: IRequestProvider<any>) {
     }
 
     public contribute() {
+        console.log(this.RequestProvider);
         console.log("Contributing", this.contributeFormData);
     }
 
@@ -34,5 +34,4 @@ export class Contributing {
     private removeAdditionalPoint(index: number) {
         this.contributeFormData.additional.splice(index, 1);
     }
-
 }

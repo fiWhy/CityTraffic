@@ -3,23 +3,23 @@ import { IAuthProvider } from "./core/providers/auth-providers/auth-providers.fa
 import { User } from "./core/entities/user";
 
 export class AppService {
-    public static $inject = ["AuthService", "AuthProvidersFactory", "$mdToast"];
+    public static $inject = ["AuthService", "AuthProvider", "$mdToast"];
     private authService: any;
     private provider: any;
     constructor(
         private AuthService: AuthService,
-        private AuthProvidersFactory: IAuthProvider,
+        private AuthProvider: IAuthProvider,
         private $mdToast: ng.material.IToastService,
         private CoreConstants) {
     }
 
     public connect($scope: ng.IScope): Promise<boolean> {
-        return this.AuthProvidersFactory.connect($scope);
+        return this.AuthProvider.connect($scope);
     }
 
     public authenticate() {
         const pinPosition = this.CoreConstants.MAIN_TOAST_POSITION;
-        return this.AuthProvidersFactory.authenticate()
+        return this.AuthProvider.authenticate()
             .then((data) => {
                 this.$mdToast.show(
                     this.$mdToast.simple()
@@ -36,10 +36,10 @@ export class AppService {
     }
 
     signOut() {
-        return this.AuthProvidersFactory.signOut();
+        return this.AuthProvider.signOut();
     }
 
     getUser(): User {
-        return this.AuthProvidersFactory.currentUser;
+        return this.AuthProvider.currentUser;
     }
 }

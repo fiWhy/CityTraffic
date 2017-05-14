@@ -1,4 +1,5 @@
 import { FirebaseAuthProvider } from "./providers/auth-providers/firebase-auth.provider";
+import { FirebaseRequestProvider } from "./providers/request-providers/firebase-request.provider";
 
 export const coreConstants = () => {
     const options = {
@@ -13,6 +14,9 @@ export const coreConstants = () => {
         },
         "AUTH": {
             "PROVIDER": FirebaseAuthProvider,
+        },
+        "REQUEST": {
+            "PROVIDER": FirebaseRequestProvider,
         }
     };
 
