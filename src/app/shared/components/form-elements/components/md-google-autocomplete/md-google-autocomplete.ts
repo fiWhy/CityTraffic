@@ -1,5 +1,5 @@
 import { MdGoogleAutocompleteService } from "./md-google-autocomplete.service";
-import { map } from "lodash";
+import { map, isEqual } from "lodash";
 
 export class MdGoogleAutocomplete implements ng.IController {
     static $inject = ["MdGoogleAutocompleteService", "$timeout", "$scope", "$q"];
@@ -11,9 +11,21 @@ export class MdGoogleAutocomplete implements ng.IController {
     constructor(private MdGoogleAutocompleteService: MdGoogleAutocompleteService,
         private $timeout: ng.ITimeoutService,
         private $scope: ng.IScope,
-        private $q: ng.IQService) { }
+        private $q: ng.IQService) {
+        this.setWatchers();
+    }
 
     public placeChange({ place }) { }
+
+    private setWatchers() {
+        this.$scope.$watch("MdGoogleAutocomplete.ngModel", (newData: any, oldData: any) => {
+            if (!isEqual(newData, oldData)) {
+                this.selectedItem = newData
+            } else {
+                return;
+            }
+        }, true)
+    }
 
     private searchTextChange(): ng.IPromise<google.maps.places.QueryAutocompletePrediction[] | any[]> {
         if (!this.searchText) {
@@ -21,8 +33,13 @@ export class MdGoogleAutocomplete implements ng.IController {
         } else {
             return this.MdGoogleAutocompleteService.search(this.searchText)
                 .then((data) => {
-                    this.queryResults = this.adaptingAddresses(data);
-                    return data;
+                    if (!data) {
+                        this.queryResults = []
+                        return [];
+                    } else {
+                        this.queryResults = this.adaptingAddresses(data);
+                        return data;
+                    }
                 }).catch((err) => {
                     console.log("Error", err);
                 })
@@ -54,7 +71,7 @@ export class MdGoogleAutocomplete implements ng.IController {
     }
 
     private getQueryResults() {
-        const result = this.searchText !== this.oldSearchText ? this.searchTextChange() : this.queryResults;
+        const result = this.searchText !== this.oldSearchText ? this.searchTextChange() : this.$q.resolve(this.queryResults);
         this.oldSearchText = this.searchText;
         return result;
     }

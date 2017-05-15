@@ -9,6 +9,7 @@ export class User {
     public lastLogin: Date;
     public location: google.maps.LatLng;
     public online: boolean;
+    public placeId: string;
     constructor(user: any) {
         this.id = user.id || null;
         this.providerId = user.providerId || null;
@@ -20,5 +21,6 @@ export class User {
         this.lastLogin = user.lastLogin || new Date();
         this.location =  user.location? new google.maps.LatLng(user.location.lat, user.location.lng): null;
         this.online = user.online || false;
+        this.placeId = user.placeId || null;
     }
 }

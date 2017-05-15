@@ -6,11 +6,11 @@ export interface IAuthResponse {
 }
 
 export interface IRequestProvider<T> {
-    get(url: string): Promise<T | T[]>;
-    post(url: string, data: any): Promise<T | T[]>;
-    patch(url: string, data: any): Promise<T | T[]>;
-    put(url: string, data: any): Promise<T | T[]>;
-    delete(url: string): Promise<void>;
+    get(url: string, additional?: any): Promise<T | T[]>;
+    post(url: string, data: any, additional?: any): Promise<T | T[]>;
+    patch(url: string, data: any, additional?: any): Promise<T | T[]>;
+    put(url: string, data: any, additional?: any): Promise<T | T[]>;
+    delete(url: string, additional?: any): Promise<void>;
 }
 
 export class RequestProvidersFactory {

@@ -10,5 +10,6 @@ export const TrafficMap: ng.IComponentOptions = {
     bindings: {
         zoom: "<",
         center: "<",
+        direction: "<",
     }
 };

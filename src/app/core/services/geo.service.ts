@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+import { filter, every } from "lodash";
 
 export class GeoService {
     static $inject = ["$q"];
@@ -47,7 +47,21 @@ export class GeoService {
 
     public getCity(pos: Position): Promise<google.maps.GeocoderResult> {
         const latLng = this.positionToLatLng(pos);
-        return this.askGeocoder({ location: latLng }, ["administrative_area_level_1"]);
+        return this.askGeocoder({ location: latLng }, ["administrative_area_level_1"])
+            .then((data: google.maps.GeocoderResult[]) => {
+                if (data.length) {
+                    return data[0];
+                } else {
+                    throw new Error("No location was found!");
+                }
+            })
+    }
+
+    public exportLatLng(location: google.maps.GeocoderResult) {
+        return {
+            lat: location.geometry.location.lat(),
+            lng: location.geometry.location.lng(),
+        }
     }
 
     private askNavigator(successCallback: PositionCallback, errorCallback: PositionErrorCallback): void {
@@ -56,8 +70,8 @@ export class GeoService {
 
     private chooseLocationByType(results: google.maps.GeocoderResult[], types: string[]) {
         if (types) {
-            return _.filter<google.maps.GeocoderResult>(results, (result) => {
-                return _.isEqual(result.types, types);
+            return filter<google.maps.GeocoderResult>(results, (result) => {
+                return every(types, (el) => result.types.indexOf(el) !== -1);
             })
         } else {
             return results;

@@ -23,14 +23,14 @@ export class AppService {
     public findCoordinatesAndSaveToUser() {
         const pinPosition = this.CoreConstants.MAIN_TOAST_POSITION;
         this.GeoService.getCurrentCoordinates()
-            .then((pos: Position) => {
-                this.GeoService.getCity(pos)
-                    .then((city) => {
-                        console.log(city);
-                    })
-                const latLng = this.GeoService.positionToLatLng(pos);
+            .then((pos: Position) => this.GeoService.getCity(pos))
+            .then((city: google.maps.GeocoderResult) => {
+                const latLng = city.geometry.location;
                 const updates = {
-                    location: { lat: latLng.lat(), lng: latLng.lng() },
+                    location: {
+                        lat: latLng.lat(), lng: latLng.lng(),
+                    },
+                    placeId: city.place_id,
                 };
                 this.RequestProvider.patch(`users/${this.AuthProvider.currentUser.id}`, updates)
                 Object.assign(this.AuthProvider.currentUser, updates);
@@ -38,7 +38,7 @@ export class AppService {
                 this.$mdToast.show(
                     this.$mdToast.simple()
                         .position(pinPosition)
-                        .textContent("Cannot reach geo service. Check your browser's configuration")
+                        .textContent(err || "Cannot reach geo service. Check your browser's configuration")
                 );
             });
     }

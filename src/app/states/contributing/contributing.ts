@@ -14,12 +14,12 @@ export class Contributing {
     }
 
     public contribute() {
-        console.log(this.RequestProvider);
-        console.log("Contributing", this.contributeFormData);
+        // console.log(this.contributeFormData);
+        this.ContributingService.contribute(this.contributeFormData);
     }
 
     private pointChanged(pointKey: string, point: google.maps.GeocoderResult) {
-        console.log(pointKey, this.contributeFormData.startPoint);
+        // console.log(pointKey, this.contributeFormData.startPoint);
     }
 
     private chooseOnMap(formDataKey: string, additional: boolean = false) {

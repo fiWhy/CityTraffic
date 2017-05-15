@@ -11,7 +11,11 @@ export const coreConstants = () => {
         },
         "REQUEST": {
             "PROVIDER": FirebaseRequestProvider,
-        }
+            "ROUTES": {
+                "USER": "user",
+                "CONTRIBUTION": "contribution"
+            }
+        },
     };
 
     return options;

@@ -1,4 +1,15 @@
 <ng-map center="41,-87" zoom="3" style="width: 100%; height: 100%;">
+    <directions ng-if="TrafficMap.preparedDirection.waypoints.length"
+        waypoints="{{ TrafficMap.preparedDirection.waypoints }}"
+        draggable="false"
+        origin="{{ TrafficMap.preparedDirection.origin }}"
+        destination="{{ TrafficMap.preparedDirection.destination }}">
+    </directions> 
+    <directions ng-if="!TrafficMap.preparedDirection.waypoints.length"
+        draggable="false"
+        origin="{{ TrafficMap.preparedDirection.origin }}"
+        destination="{{ TrafficMap.preparedDirection.destination }}">
+    </directions>
 </ng-map>
 <md-button class="md-fab md-fab-bottom-right" ng-if="TrafficMap.center" ng-click="TrafficMap.backToCenter(TrafficMap.center)" ;>
     <md-icon md-svg-icon="room-white"></md-icon>

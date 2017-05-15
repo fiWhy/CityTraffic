@@ -7,7 +7,7 @@ export interface IFirebaseAuthResponse extends IAuthResponse {
 }
 
 export class FirebaseAuthProvider implements IAuthProvider {
-    static $inject = ["$firebaseObject", "$firebaseArray", "$firebaseAuth", "FirebaseRequestProvider"];
+    static $inject = ["$firebaseObject", "$firebaseArray", "$firebaseAuth", "FirebaseRequestProvider", "$rootScope"];
     public currentUser: User;
     public status: boolean = false;
     private auth: any;
@@ -16,7 +16,8 @@ export class FirebaseAuthProvider implements IAuthProvider {
     constructor(private $firebaseObject,
         private $firebaseArray,
         private $firebaseAuth,
-        private FirebaseRequestProvider: FirebaseRequestProvider<User>) {
+        private FirebaseRequestProvider: FirebaseRequestProvider<User>,
+        private $rootScope: ng.IRootScopeService) {
         this.auth = this.$firebaseAuth();
         this.registerListeners();
         this.firebaseRef = this.prepareFirebaseRef();
@@ -78,6 +79,7 @@ export class FirebaseAuthProvider implements IAuthProvider {
                     });
                     this.currentUser = new User(user);
                     this.status = true;
+                    this.$rootScope.$broadcast("$userAuthorized");
                 });
             } else {
                 this.currentUser = null;
