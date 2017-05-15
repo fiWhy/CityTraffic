@@ -41,8 +41,13 @@ export class GeoService {
         return new google.maps.LatLng(lat, lng);
     }
 
-    public positionToLatLng(pos: Position): google.maps.LatLng {
+    public positionToLatLng(pos: Position, types?: string[]): google.maps.LatLng {
         return new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    }
+
+    public getCity(pos: Position): Promise<google.maps.GeocoderResult> {
+        const latLng = this.positionToLatLng(pos);
+        return this.askGeocoder({ location: latLng }, ["administrative_area_level_1"]);
     }
 
     private askNavigator(successCallback: PositionCallback, errorCallback: PositionErrorCallback): void {

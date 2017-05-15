@@ -24,6 +24,10 @@ export class AppService {
         const pinPosition = this.CoreConstants.MAIN_TOAST_POSITION;
         this.GeoService.getCurrentCoordinates()
             .then((pos: Position) => {
+                this.GeoService.getCity(pos)
+                    .then((city) => {
+                        console.log(city);
+                    })
                 const latLng = this.GeoService.positionToLatLng(pos);
                 const updates = {
                     location: { lat: latLng.lat(), lng: latLng.lng() },
