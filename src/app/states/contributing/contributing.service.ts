@@ -2,6 +2,7 @@ import { IDialogService } from "../../shared/dialogs";
 import { GeoService } from "../../core/services";
 import { IRequestProvider, IAuthProvider } from "../../core/providers";
 import { Contribution } from "../../core/entities";
+import { IFormData } from "./contributing";
 
 export class ContributingService {
     static $inject = ["ChooseOnMapDialogService", "GeoService", "RequestProvider", "AuthProvider", "CoreConstants"];
@@ -36,12 +37,13 @@ export class ContributingService {
 
     }
 
-    private prepareData(data) {
+    private prepareData(data: IFormData) {
         const preparedData = {
             userId: null,
+            title: `${data.startPoint.formatted_address} -${data.endPoint.formatted_address}`,
             startPoint: this.GeoService.exportLatLng(data.startPoint),
             endPoint: this.GeoService.exportLatLng(data.endPoint),
-            additional: data.additional.map((add) => this.GeoService.exportLatLng(add)),
+            additional: data.additional? data.additional.map((add) => this.GeoService.exportLatLng(add)): [],
         };
         preparedData.userId = this.AuthProvider.currentUser.id;
         return preparedData

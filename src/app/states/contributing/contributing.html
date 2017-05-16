@@ -9,7 +9,11 @@
             <md-button class="md-fab md-mini" ng-click="Contributing.chooseOnMap('startPoint')" aria-label="Find on map">
                 <md-icon md-svg-src="room-white"></md-icon>
             </md-button>
-            <md-google-autocomplete flex place-change="Contributing.pointChanged('startPoint', place)" required="true" ng-model="Contributing.contributeFormData.startPoint"
+            <md-google-autocomplete flex 
+                                    place-change="Contributing.pointChanged('startPoint', place)" 
+                                    bounds="Contributing.AuthProvider.currentUser.location.bounds"
+                                    required="true" 
+                                    ng-model="Contributing.contributeFormData.startPoint"
                 class="md-block" placeholder="Start point"></md-google-autocomplete>
         </div>
 
@@ -17,7 +21,12 @@
             <md-button class="md-fab md-mini" ng-click="Contributing.chooseOnMap($index, true)" aria-label="Find on map">
                 <md-icon md-svg-src="room-white"></md-icon>
             </md-button>
-            <md-google-autocomplete layout="row" flex place-change="Contributing.pointChanged('additional', place)" required="true" ng-model="Contributing.contributeFormData.additional[$index]"
+            <md-google-autocomplete layout="row" 
+                                    flex 
+                                    place-change="Contributing.pointChanged('additional', place)"
+                                    bounds="Contributing.AuthProvider.currentUser.location.bounds"
+                                    required="true" 
+                                    ng-model="Contributing.contributeFormData.additional[$index]"
                 class="md-block" placeholder="Additional point"></md-google-autocomplete>
             <md-button class="md-fab md-mini" ng-click="Contributing.removeAdditionalPoint($index)" aria-label="Remove point">
                 <md-icon md-svg-icon="cancel-white"></md-icon>
@@ -37,7 +46,11 @@
             <md-button class="md-fab md-mini" ng-click="Contributing.chooseOnMap('endPoint')" aria-label="Find on map">
                 <md-icon md-svg-src="room-white"></md-icon>
             </md-button>
-            <md-google-autocomplete flex place-change="Contributing.pointChanged('endPoint', place)" required="true" ng-model="Contributing.contributeFormData.endPoint"
+            <md-google-autocomplete flex 
+                                    bounds="Contributing.AuthProvider.currentUser.location.bounds"
+                                    place-change="Contributing.pointChanged('endPoint', place)" 
+                                    required="true" 
+                                    ng-model="Contributing.contributeFormData.endPoint"
                 class="md-block" placeholder="End point"></md-google-autocomplete>
         </div>
     </form>

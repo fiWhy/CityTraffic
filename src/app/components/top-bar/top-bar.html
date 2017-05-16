@@ -1,11 +1,11 @@
 <div class="md-toolbar-tools">
-    <md-button hide-gt-md class="md-icon-button" aria-label="Menu">
+    <md-button hide-gt-sm class="md-icon-button" aria-label="Menu">
         <md-icon ng-click="TopBar.toggleLeftSideNav();" md-svg-icon="menu-white"></md-icon>
     </md-button>
-    <nav-bar></nav-bar>
+    <nav-bar hide show-gt-sm></nav-bar>
     <span flex></span>
     <div flex="33">
-        <span data-ng-if="TopBar.user" data-ng-bind="TopBar.user.username"></span>
+        <span data-ng-if="TopBar.user" hide show-gt-sm ng-bind="TopBar.user.username"></span>
         <md-button data-ng-if="!TopBar.user" class="md-fab md-mini" ng-click="TopBar.auth()" aria-label="Authorize">
             <md-icon md-svg-icon="account-white"></md-icon>
         </md-button>
@@ -28,11 +28,11 @@
             </md-tooltip>
         </md-button>
 
-        <md-button data-ng-if="TopBar.user" class="md-icon-button" data-ui-sref="app.settings" aria-label="Settings">
+        <!--<md-button data-ng-if="TopBar.user" class="md-icon-button" data-ui-sref="app.settings" aria-label="Settings">
             <md-icon md-svg-icon="settings-white"></md-icon>
             <md-tooltip>
                 Settings
             </md-tooltip>
-        </md-button>
+        </md-button>-->
     </div>
 </div>

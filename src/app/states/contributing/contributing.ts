@@ -1,25 +1,38 @@
 import { ContributingService } from "./contributing.service";
 import { IRequestProvider } from "../../core/providers";
 import { IAuthProvider } from "../../core/providers";
-import { GeoService } from "../../core/services/geo.service";
+import { GeoService, ToastService } from "../../core/services";
+
+
+export interface IFormData {
+    title: string;
+    startPoint: google.maps.GeocoderResult;
+    endPoint: google.maps.GeocoderResult;
+    additional?: google.maps.GeocoderResult[];
+}
 
 export class Contributing {
-    static $inject = ["ContributingService", "AuthProvider", "RequestProvider", "GeoService"];
-    public contributeFormData: any = { additional: [] };
+    static $inject = ["ContributingService", "AuthProvider", "RequestProvider", "GeoService", "ToastService"];
+    public contributeFormData: IFormData;
     public currentLocation: google.maps.LatLng;
     constructor(private ContributingService: ContributingService,
         private AuthProvider: IAuthProvider,
         private RequestProvider: IRequestProvider<any>,
-        private GeoService: GeoService) {
+        private GeoService: GeoService,
+        private ToastService: ToastService) {
     }
 
     public contribute() {
-        // console.log(this.contributeFormData);
-        this.ContributingService.contribute(this.contributeFormData);
+        this.validate(this.contributeFormData)
+            .then((data) => {
+                this.ContributingService.contribute(this.contributeFormData);
+            }).catch(e => {
+                this.ToastService.showSimple(e);
+            })
     }
 
     private pointChanged(pointKey: string, point: google.maps.GeocoderResult) {
-        // console.log(pointKey, this.contributeFormData.startPoint);
+        // console.log(pointKey, this.contributeFormData[pointKey]);
     }
 
     private chooseOnMap(formDataKey: string, additional: boolean = false) {
@@ -31,6 +44,16 @@ export class Contributing {
                     this.contributeFormData[formDataKey] = result;
                 }
             }).catch(() => { });
+    }
+
+    private validate(data: IFormData): Promise<IFormData> {
+        return new Promise((resolve, reject) => {
+            if (!data.startPoint.place_id || !data.endPoint.place_id) {
+                reject("You need to pick google map item");
+            } else {
+                resolve(data);
+            }
+        })
     }
 
     private addAdditionalPoint() {

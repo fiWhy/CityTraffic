@@ -1,9 +1,9 @@
-import { GeoService } from "../../../../core/services/geo.service";
+import { GeoService, ToastService } from "../../../../core/services";
 import { IAuthProvider } from "../../../../core/providers";
 import { Contribution } from "../../../../core/entities";
 
 export class TrafficMap {
-    static $inject = ["NgMap", "$mdToast", "CoreConstants", "GeoService", "AuthProvider", "$q", "$scope"];
+    static $inject = ["NgMap", "$mdToast", "CoreConstants", "GeoService", "AuthProvider", "$q", "$scope", "ToastService"];
     private zoom: number;
     private center: google.maps.LatLng;
     private defaultZoom: number = 10;
@@ -14,7 +14,8 @@ export class TrafficMap {
         private GeoService: GeoService,
         private AuthProvider: IAuthProvider,
         private $q: ng.IQService,
-        private $scope: ng.IScope) {
+        private $scope: ng.IScope,
+        private ToastService: ToastService) {
         this.setWatchers();
     }
 
@@ -31,7 +32,7 @@ export class TrafficMap {
     }
 
     private getCurrentCoordinates(): google.maps.LatLng {
-        return this.AuthProvider.currentUser.location;
+        return this.AuthProvider.currentUser.location.location;
     }
 
     private setCenter(pos: google.maps.LatLng): void {
@@ -43,12 +44,11 @@ export class TrafficMap {
 
     private backToCenter(center: google.maps.LatLng) {
         if (center) {
-            this.notifyAboutUsersPosition(center)
             this.NgMap.getMap().then((map) => {
                 map.setCenter(center);
             })
         } else {
-            this.notify("Please set your current coordinates first");
+            this.ToastService.showSimple("Please set your current coordinates first");
         }
     }
 
@@ -70,28 +70,9 @@ export class TrafficMap {
         };
     }
 
-    private notifyAboutUsersPosition(location: google.maps.LatLng) {
-        const geocoder = new google.maps.Geocoder;
-        geocoder.geocode({
-            location,
-        }, (res, status) => {
-            const administrativeArea = this.findAdministrativeArea(res);
-            const result = administrativeArea.length ? administrativeArea[0] : {};
-            this.notify(result.formatted_address);
-        })
-    }
-
     private findAdministrativeArea(areas: any[]) {
         return areas.filter((area) => {
             return area.types.indexOf("administrative_area_level_1") != -1;
         });
-    }
-
-    private notify(message): void {
-        this.$mdToast.show(
-            this.$mdToast.simple()
-                .position(this.CoreConstants.MAIN_TOAST_POSITION)
-                .textContent(message)
-        );
     }
 }

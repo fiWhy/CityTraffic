@@ -6,20 +6,33 @@ export class Dashboard {
     static $inject = ["DashboardService", "AuthProvider", "$rootScope"];
     private cityPoints: any[];
     private directions: Contribution[] = [];
-    private chosenDirection: Contribution;
+    private selectedDirection: Contribution;
     constructor(private DashboardService: DashboardService,
         private AuthProvider: IAuthProvider,
         private $rootScope: ng.IRootScopeService) {
         this.getCityPoints();
+        console.log("Initiating controller");
     }
 
     private getCityPoints() {
-        this.$rootScope.$on("$userAuthorized", () => {
-            this.DashboardService.getCityPoints()
-                .then((directions) => {
-                    this.directions = directions;
-                    this.chosenDirection = this.directions[0];
-                });
-        })
+        if (this.AuthProvider.currentUser) {
+            this.pointsRequest();
+        } else {
+            this.$rootScope.$on("$userAuthorized", () => {
+                this.pointsRequest();
+            })
+        }
+    }
+
+    private pointsRequest() {
+        this.DashboardService.getCityPoints()
+            .then((directions) => {
+                this.directions = directions;
+                this.selectedDirection = this.directions[0];
+            });
+    }
+
+    private directionSelected(direction: Contribution) {
+        console.log(direction);
     }
 }

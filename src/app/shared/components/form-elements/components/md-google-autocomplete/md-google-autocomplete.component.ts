@@ -14,5 +14,8 @@ export const MdGoogleAutocomplete: ng.IComponentOptions = {
         ngModel: "=",
         placeChange: "&",
         required: "=",
+        location: "<",
+        radius: "<",
+        bounds: "<",
     }
 }

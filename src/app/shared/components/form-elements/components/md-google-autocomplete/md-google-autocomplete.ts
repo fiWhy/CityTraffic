@@ -8,6 +8,9 @@ export class MdGoogleAutocomplete implements ng.IController {
     private oldSearchText: string;
     private queryResults: any[] = [];
     private ngModel: any;
+    private location: google.maps.LatLng;
+    private radius: number;
+    private bounds: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral;
     constructor(private MdGoogleAutocompleteService: MdGoogleAutocompleteService,
         private $timeout: ng.ITimeoutService,
         private $scope: ng.IScope,
@@ -31,7 +34,7 @@ export class MdGoogleAutocomplete implements ng.IController {
         if (!this.searchText) {
             return this.$q.resolve([]);
         } else {
-            return this.MdGoogleAutocompleteService.search(this.searchText)
+            return this.MdGoogleAutocompleteService.search(this.searchText, this.location, this.radius, this.bounds)
                 .then((data) => {
                     if (!data) {
                         this.queryResults = []

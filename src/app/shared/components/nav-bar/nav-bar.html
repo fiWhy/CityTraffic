@@ -1,5 +1,16 @@
-<md-nav-bar data-ng-if="NavBar.menuItems.length" md-selected-nav-item="NavBar.NavBarService.activeMenuItem" nav-bar-aria-label="navigation links">
+<md-nav-bar data-ng-if="NavBar.menuItems.length && !NavBar.list" md-selected-nav-item="NavBar.NavBarService.activeMenuItem"
+    nav-bar-aria-label="navigation links">
     <md-nav-item data-ng-repeat="item in NavBar.menuItems" md-nav-click="NavBar.goTo(item.sref)" name="{{ item.name }}">
         {{ item.title }}
     </md-nav-item>
 </md-nav-bar>
+
+
+<md-list data-ng-if="NavBar.menuItems.length && NavBar.list">
+    <md-list-item ng-class="{active: NavBar.NavBarService.activeMenuItem === item }"
+        data-ng-repeat="item in NavBar.menuItems">
+        <md-button class="nav-bar-button" ng-click="NavBar.goTo(item.sref)" name="{{ item.name }}">
+            {{ item.title }}
+        </md-button>
+    </md-list-item>
+</md-list>

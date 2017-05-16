@@ -1,3 +1,5 @@
+import { LocationWithBounds } from "./";
+
 export class User {
     public id: number | string;
     public providerId: string;
@@ -7,7 +9,7 @@ export class User {
     public token: string;
     public additionalInfo: any;
     public lastLogin: Date;
-    public location: google.maps.LatLng;
+    public location: LocationWithBounds = new LocationWithBounds({});
     public online: boolean;
     public placeId: string;
     constructor(user: any) {
@@ -19,7 +21,7 @@ export class User {
         this.token = user.token || null;
         this.additionalInfo = user.additionalInfo || null;
         this.lastLogin = user.lastLogin || new Date();
-        this.location =  user.location? new google.maps.LatLng(user.location.lat, user.location.lng): null;
+        this.location = new LocationWithBounds(user.location)
         this.online = user.online || false;
         this.placeId = user.placeId || null;
     }
