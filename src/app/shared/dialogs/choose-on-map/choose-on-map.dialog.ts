@@ -39,7 +39,7 @@ export class ChooseOnMapDialog {
     }
 
     private getPoint = (event): void => {
-        this.GeoService.askGeocoder({ location: event.latLng }, ["street_address"])
+        this.GeoService.askGeocoder({ location: event.latLng })
             .then((results: google.maps.GeocoderResult[]) => {
                 let result;
                 if (!results.length) {

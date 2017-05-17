@@ -28,10 +28,11 @@ export class Dashboard {
     }
 
     private pointsRequest() {
-        this.DashboardService.getCityPoints()
+        return this.DashboardService.getCityPoints()
             .then((directions) => {
                 this.directions = directions;
                 this.selectedDirection = this.directions[0];
+                return directions;
             });
     }
 

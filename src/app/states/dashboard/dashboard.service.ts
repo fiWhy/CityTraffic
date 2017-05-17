@@ -18,9 +18,10 @@ export class DashboardService {
     public getCityPoints() {
         this.AuthProvider.getUser();
         const url = `${this.CoreConstants.REQUEST.ROUTES.CONTRIBUTION}/${this.AuthProvider.currentUser.placeId}`;
+        
         return this.RequestProvider.get(url, { asArray: true })
             .then((data) => {
                 return data.map((location) => new Contribution(location))
-            });;
+            });
     }
 }

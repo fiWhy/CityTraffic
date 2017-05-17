@@ -12,14 +12,15 @@ export interface IFormData {
 }
 
 export class Contributing {
-    static $inject = ["ContributingService", "AuthProvider", "RequestProvider", "GeoService", "ToastService"];
+    static $inject = ["ContributingService", "AuthProvider", "RequestProvider", "GeoService", "ToastService", "$state"];
     public contributeFormData: IFormData;
     public currentLocation: google.maps.LatLng;
     constructor(private ContributingService: ContributingService,
         private AuthProvider: IAuthProvider,
         private RequestProvider: IRequestProvider<any>,
         private GeoService: GeoService,
-        private ToastService: ToastService) {
+        private ToastService: ToastService,
+        private $state: ng.ui.IStateService) {
         this.contributeFormData = {
             title: "",
             startPoint: null,
@@ -31,7 +32,10 @@ export class Contributing {
     public contribute() {
         this.validate(this.contributeFormData)
             .then((data) => {
-                this.ContributingService.contribute(this.contributeFormData);
+                this.ContributingService.contribute(this.contributeFormData)
+                    .then(() => {
+                        this.$state.go("app.dashboard");  
+                    });
             }).catch(e => {
                 this.ToastService.showSimple(e);
             })
