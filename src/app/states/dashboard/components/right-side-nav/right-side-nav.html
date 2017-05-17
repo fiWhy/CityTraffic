@@ -1,9 +1,9 @@
-<md-sidenav md-component-id="dashboard-side-nav" md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp">
+<md-sidenav md-component-id="dashboard-side-nav" ng-if="RightSideNav.currentUser" md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-4dp">
     <md-toolbar>
         <h1 class="md-toolbar-tools">Ways</h1>
     </md-toolbar>
-    <md-list data-ng-if="RightSideNav.directions.length">
-        <md-list-item ng-class="{active: RightSideNav.selectedDirection === direction }" data-ng-repeat="direction in RightSideNav.directions">
+    <md-list data-ng-if="RightSideNav.directions">
+        <md-list-item ng-class="{active: RightSideNav.selectedDirection === direction }" data-ng-repeat="direction in RightSideNav.directions | objectToArray">
             <md-button class="nav-bar-button" ng-click="RightSideNav.changeDirection(direction)">
                 {{ direction.title }}
             </md-button>

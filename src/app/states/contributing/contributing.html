@@ -1,5 +1,5 @@
 <md-content flex layout-padding>
-    <p ng-if="!Contributing.AuthProvider.currentUser.location">To start contribution you need to login and set your current location first!</p>
+    <p ng-if="!Contributing.AuthProvider.currentUser.location.location">To start contribution you need to login and set your current location first!</p>
     <form name="contributing" ng-if="Contributing.AuthProvider.currentUser.location" ng-submit="contributing.$valid && Contributing.contribute()">
         <div flex layout="row">
             <md-time-picker flex ng-model="Contributing.contributeFormData.startTime" md-placeholder="Day starting"></md-datepicker>

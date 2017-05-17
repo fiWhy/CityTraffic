@@ -1,5 +1,6 @@
 import { IAuthResponse, IAuthProvider } from "./auth-providers.factory";
 import { User } from "../../entities/user";
+import { Contribution } from "../../entities/contribution";
 import { FirebaseRequestProvider } from "../request-providers/firebase-request.provider";
 
 export interface IFirebaseAuthResponse extends IAuthResponse {
@@ -7,17 +8,19 @@ export interface IFirebaseAuthResponse extends IAuthResponse {
 }
 
 export class FirebaseAuthProvider implements IAuthProvider {
-    static $inject = ["$firebaseObject", "$firebaseArray", "$firebaseAuth", "FirebaseRequestProvider", "$rootScope"];
+    static $inject = ["$firebaseObject", "$firebaseArray", "$firebaseAuth", "FirebaseRequestProvider", "$rootScope", "$filter"];
     public currentUser: User;
     public status: boolean = false;
     private auth: any;
     private firebaseRef: any;
     private firebaseUserArrayRef: any;
+    private connectedScope: ng.IScope;
     constructor(private $firebaseObject,
         private $firebaseArray,
         private $firebaseAuth,
         private FirebaseRequestProvider: FirebaseRequestProvider<User>,
-        private $rootScope: ng.IRootScopeService) {
+        private $rootScope: ng.IRootScopeService,
+        private $filter) {
         this.auth = this.$firebaseAuth();
         this.registerListeners();
         this.firebaseRef = this.prepareFirebaseRef();
@@ -25,9 +28,9 @@ export class FirebaseAuthProvider implements IAuthProvider {
     }
 
     connect($scope: ng.IScope): Promise<boolean> {
-        const ref = this.firebaseRef;
-        const syncObject = this.$firebaseObject(ref);
-        syncObject.$bindTo($scope, "firebase");
+        const contribution = this.$firebaseObject(this.firebaseRef.child("contribution"));
+        this.connectedScope = $scope;
+        contribution.$bindTo($scope, "contribution");
         return Promise.resolve(true);
     }
 

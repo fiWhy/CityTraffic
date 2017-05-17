@@ -16,7 +16,13 @@ export class TrafficMap {
         private $q: ng.IQService,
         private $scope: ng.IScope,
         private ToastService: ToastService) {
+        this.initMap();
         this.setWatchers();
+    }
+
+    private initMap() {
+        this.NgMap.getMap().then((map) => {
+        });
     }
 
     private setWatchers() {
@@ -45,6 +51,7 @@ export class TrafficMap {
     private backToCenter(center: google.maps.LatLng) {
         if (center) {
             this.NgMap.getMap().then((map) => {
+                google.maps.event.trigger(map, 'resize');
                 map.setCenter(center);
             })
         } else {
@@ -62,11 +69,7 @@ export class TrafficMap {
         this.preparedDirection = {
             origin: `${direction.startPoint.lat()}, ${direction.startPoint.lng()}`,
             destination: `${direction.endPoint.lat()}, ${direction.endPoint.lng()}`,
-            waypoints: direction.additional.map((additional) => {
-                return {
-                    location: { lat: additional.lat, lng: additional.lng }, stopover: true,
-                };
-            })
+            waypoints: direction.additional
         };
     }
 
