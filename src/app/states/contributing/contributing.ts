@@ -20,6 +20,12 @@ export class Contributing {
         private RequestProvider: IRequestProvider<any>,
         private GeoService: GeoService,
         private ToastService: ToastService) {
+        this.contributeFormData = {
+            title: "",
+            startPoint: null,
+            endPoint: null,
+            additional: [],
+        }
     }
 
     public contribute() {
@@ -57,7 +63,7 @@ export class Contributing {
     }
 
     private addAdditionalPoint() {
-        this.contributeFormData.additional.push(undefined);
+        this.contributeFormData.additional.push(null);
     }
 
     private removeAdditionalPoint(index: number) {

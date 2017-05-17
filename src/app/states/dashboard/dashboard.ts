@@ -3,25 +3,28 @@ import { IAuthProvider } from "../../core/providers";
 import { Contribution } from "../../core/entities";
 
 export class Dashboard {
-    static $inject = ["DashboardService", "AuthProvider", "$rootScope"];
+    static $inject = ["DashboardService", "AuthProvider", "$rootScope", "NgMap"];
     private cityPoints: any[];
     private directions: Contribution[] = [];
     private selectedDirection: Contribution;
     constructor(private DashboardService: DashboardService,
         private AuthProvider: IAuthProvider,
-        private $rootScope: ng.IRootScopeService) {
+        private $rootScope: ng.IRootScopeService,
+        private NgMap) {
         this.getCityPoints();
-        console.log("Initiating controller");
     }
 
     private getCityPoints() {
-        if (this.AuthProvider.currentUser) {
-            this.pointsRequest();
-        } else {
-            this.$rootScope.$on("$userAuthorized", () => {
+        this.NgMap.getMap().then((map) => {
+            google.maps.event.trigger(map, 'resize');
+            if (this.AuthProvider.currentUser) {
                 this.pointsRequest();
-            })
-        }
+            } else {
+                this.$rootScope.$on("$userAuthorized", () => {
+                    this.pointsRequest();
+                })
+            }
+        })
     }
 
     private pointsRequest() {

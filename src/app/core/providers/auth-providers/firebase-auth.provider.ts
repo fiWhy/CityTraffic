@@ -33,7 +33,15 @@ export class FirebaseAuthProvider implements IAuthProvider {
 
     authenticate(): Promise<User> {
         const authProvider = new firebase.auth.GoogleAuthProvider();
-        return this.auth.$signInWithPopup(authProvider);
+        return this.auth.$signInWithPopup(authProvider)
+            .then((result: IFirebaseAuthResponse) => {
+                if (result.credential) {
+                    const user = this.createOrUpdateUserInFirebase(result.user);
+                    return user;
+                } else {
+                    throw result;
+                }
+            });
     }
 
     signOut(): Promise<any> {
