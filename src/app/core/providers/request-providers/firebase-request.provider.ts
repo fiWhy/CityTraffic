@@ -4,12 +4,12 @@ export class FirebaseRequestProvider<T> implements IRequestProvider<T> {
     static $inject = ["$firebaseArray", "$firebaseObject"];
     private firebaseRef: any;
     constructor(private $firebaseArray, private $firebaseObject) {
-        this.firebaseRef = firebase.database().ref()
+        this.firebaseRef = firebase.database().ref();
     }
 
     get(url: string, additional: any = {}): Promise<T | T[]> {
         const { ref, id, idList } = this.parseUrl(url);
-        const firebaseProvider = id && !additional.asArray? this.connectToFirebaseObject(ref, idList) : this.connectToFirebaseArray(ref, idList, id);
+        const firebaseProvider = id && !additional.asArray ? this.connectToFirebaseObject(ref, idList) : this.connectToFirebaseArray(ref, idList, id);
         return firebaseProvider.$loaded().then((newRef) => {
             if (id && !additional.asArray) {
                 const id = newRef.key;
@@ -18,8 +18,7 @@ export class FirebaseRequestProvider<T> implements IRequestProvider<T> {
             } else {
                 return firebaseProvider;
             }
-        })
-
+        });
     }
 
     post(url: string, data: any, additional: any = {}): Promise<T | T[]> {
@@ -37,8 +36,7 @@ export class FirebaseRequestProvider<T> implements IRequestProvider<T> {
                     resolve(firebaseProvider[index]);
                 });
             }
-
-        })
+        });
     }
 
     patch(url: string, data: any): Promise<T | T[]> {
@@ -96,7 +94,7 @@ export class FirebaseRequestProvider<T> implements IRequestProvider<T> {
     }
 
     private deepChild(ref, idList, id?: any) {
-        let currentRef = this.firebaseRef.child(ref)
+        let currentRef = this.firebaseRef.child(ref);
         for (let i = 0; i < idList.length; i++) {
             currentRef = currentRef.child(idList[i]);
         }

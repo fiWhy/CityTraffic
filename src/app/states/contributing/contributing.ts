@@ -26,7 +26,7 @@ export class Contributing {
             startPoint: null,
             endPoint: null,
             additional: [],
-        }
+        };
     }
 
     public contribute() {
@@ -34,11 +34,11 @@ export class Contributing {
             .then((data) => {
                 this.ContributingService.contribute(this.contributeFormData)
                     .then(() => {
-                        this.$state.go("app.dashboard");  
+                        this.$state.go("app.dashboard");
                     });
             }).catch(e => {
                 this.ToastService.showSimple(e);
-            })
+            });
     }
 
     private pointChanged(pointKey: string, point: google.maps.GeocoderResult) {
@@ -63,7 +63,7 @@ export class Contributing {
             } else {
                 resolve(data);
             }
-        })
+        });
     }
 
     private addAdditionalPoint() {

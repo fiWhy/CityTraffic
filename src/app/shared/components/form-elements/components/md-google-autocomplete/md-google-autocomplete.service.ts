@@ -15,7 +15,7 @@ export class MdGoogleAutocompleteService {
         const defer = this.$q.defer();
         const options: google.maps.places.AutocompletionRequest = this.prepareSearchOptions(input, location, radius, bounds);
         this.autocompleteService.getQueryPredictions(options, (result: google.maps.places.QueryAutocompletePrediction[], status: google.maps.places.PlacesServiceStatus) => {
-            if (this.autocompleteErrorStatuses.indexOf(status) != -1) {
+            if (this.autocompleteErrorStatuses.indexOf(status) !== -1) {
                 defer.reject(result);
             } else {
                 defer.resolve(result);
@@ -30,7 +30,7 @@ export class MdGoogleAutocompleteService {
             this.geocoderService.geocode({
                 placeId
             }, (result: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
-                if (this.geocodeErrorStatuses.indexOf(status) != -1 || !result.length) {
+                if (this.geocodeErrorStatuses.indexOf(status) !== -1 || !result.length) {
                     defer.reject(result);
                 } else {
                     this.beforeFoundPlace = result[0];

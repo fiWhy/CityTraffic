@@ -14,6 +14,6 @@ export class Dashboard {
         private NgMap) { }
 
     private directionSelected(direction: Contribution) {
-        this.selectedDirection = new Contribution(direction)
+        this.selectedDirection = new Contribution(direction);
     }
 }

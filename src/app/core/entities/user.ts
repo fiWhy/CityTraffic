@@ -21,7 +21,7 @@ export class User {
         this.token = user.token || null;
         this.additionalInfo = user.additionalInfo || null;
         this.lastLogin = user.lastLogin || new Date();
-        this.location = new LocationWithBounds(user.location)
+        this.location = new LocationWithBounds(user.location);
         this.online = user.online || false;
         this.placeId = user.placeId || null;
     }

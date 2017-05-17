@@ -15,14 +15,14 @@ export class ChooseOnMapDialogService implements IDialogService {
     show(scope?: IChooseOnMapDialogScope): ng.IPromise<any> {
         return this.$mdDialog.show({
             locals: {
-                zoom: scope? scope.zoom: undefined,
-                center: scope? scope.center: undefined,
+                zoom: scope ? scope.zoom : undefined,
+                center: scope ? scope.center : undefined,
             },
             controller: ChooseOnMapDialog,
             controllerAs: ChooseOnMapDialog.name,
             template: require("./choose-on-map.html"),
             clickOutsideToClose: true,
             escapeToClose: true,
-        })
+        });
     }
 }

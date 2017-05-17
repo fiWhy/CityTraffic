@@ -17,7 +17,7 @@ export class ChooseOnMapDialog {
     private initMap() {
         this.NgMap.getMap().then((map) => {
             const center = this.createCenter();
-            google.maps.event.trigger(map, 'resize');
+            google.maps.event.trigger(map, "resize");
             if (center) {
                 map.setCenter(center);
             } else {

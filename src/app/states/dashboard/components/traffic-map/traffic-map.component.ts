@@ -11,5 +11,5 @@ export const TrafficMap: ng.IComponentOptions = {
         zoom: "<",
         center: "<",
         direction: "<",
-    }
+    },
 };

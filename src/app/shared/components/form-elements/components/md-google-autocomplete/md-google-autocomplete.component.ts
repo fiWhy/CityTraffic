@@ -17,5 +17,5 @@ export const MdGoogleAutocomplete: ng.IComponentOptions = {
         location: "<",
         radius: "<",
         bounds: "<",
-    }
-}
+    },
+};

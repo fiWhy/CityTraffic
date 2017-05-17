@@ -14,7 +14,7 @@ export class Contribution {
         this.endTime = endTime;
         this.startPoint = this.preparePoint(startPoint);
         this.endPoint = this.preparePoint(endPoint);
-        this.additional = additional? additional.map((point) => this.prepareWayPoint(point)): [];
+        this.additional = additional ? additional.map((point) => this.prepareWayPoint(point)) : [];
     }
     private prepareWayPoint(point: Location) {
         return {

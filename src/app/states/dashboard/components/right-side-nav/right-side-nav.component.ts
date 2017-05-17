@@ -10,7 +10,7 @@ export const RightSideNav: ng.IComponentOptions = {
     bindings: {
         directions: "<",
         selectedDirection: "=",
-        directionSelected: "&", 
+        directionSelected: "&",
         currentUser: "<",
     },
 };

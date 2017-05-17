@@ -29,7 +29,7 @@ export class TrafficMap {
         this.$scope.$watch("TrafficMap.center", (val: google.maps.LatLng) => this.backToCenter(val));
         this.$scope.$watch("TrafficMap.direction", (val: Contribution) => {
             if (val) {
-                this.prepareDirection(val)
+                this.prepareDirection(val);
             } else {
                 return;
             }
@@ -45,15 +45,15 @@ export class TrafficMap {
         this.NgMap.getMap().then((map) => {
             this.backToCenter(pos);
             this.backToZoom(this.zoom || this.defaultZoom);
-        })
+        });
     }
 
     private backToCenter(center: google.maps.LatLng) {
         if (center) {
             this.NgMap.getMap().then((map) => {
-                google.maps.event.trigger(map, 'resize');
+                google.maps.event.trigger(map, "resize");
                 map.setCenter(center);
-            })
+            });
         } else {
             this.ToastService.showSimple("Please set your current coordinates first");
         }
@@ -62,7 +62,7 @@ export class TrafficMap {
     private backToZoom(zoom: number) {
         this.NgMap.getMap().then((map) => {
             map.setZoom(zoom || this.defaultZoom);
-        })
+        });
     }
 
     private prepareDirection(direction: Contribution) {
@@ -75,7 +75,7 @@ export class TrafficMap {
 
     private findAdministrativeArea(areas: any[]) {
         return areas.filter((area) => {
-            return area.types.indexOf("administrative_area_level_1") != -1;
+            return area.types.indexOf("administrative_area_level_1") !== -1;
         });
     }
 }

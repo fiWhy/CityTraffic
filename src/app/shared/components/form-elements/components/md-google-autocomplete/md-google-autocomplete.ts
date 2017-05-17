@@ -23,11 +23,11 @@ export class MdGoogleAutocomplete implements ng.IController {
     private setWatchers() {
         this.$scope.$watch("MdGoogleAutocomplete.ngModel", (newData: any, oldData: any) => {
             if (!isEqual(newData, oldData)) {
-                this.selectedItem = newData
+                this.selectedItem = newData;
             } else {
                 return;
             }
-        }, true)
+        }, true);
     }
 
     private searchTextChange(): ng.IPromise<google.maps.places.QueryAutocompletePrediction[] | any[]> {
@@ -37,7 +37,7 @@ export class MdGoogleAutocomplete implements ng.IController {
             return this.MdGoogleAutocompleteService.search(this.searchText, this.location, this.radius, this.bounds)
                 .then((data) => {
                     if (!data) {
-                        this.queryResults = []
+                        this.queryResults = [];
                         return [];
                     } else {
                         this.queryResults = this.adaptingAddresses(data);
@@ -45,7 +45,7 @@ export class MdGoogleAutocomplete implements ng.IController {
                     }
                 }).catch((err) => {
                     console.log("Error", err);
-                })
+                });
         }
     }
 
@@ -53,7 +53,7 @@ export class MdGoogleAutocomplete implements ng.IController {
         return map(data, (result) => {
             return Object.assign({}, result, {
                 formatted_address: result.description
-            })
+            });
         });
     }
 
@@ -64,10 +64,10 @@ export class MdGoogleAutocomplete implements ng.IController {
                     this.ngModel = place;
                     this.$timeout(() => {
                         this.placeChange({ place });
-                    })
+                    });
                 }).catch((err) => {
                     console.log("Error", err);
-                })
+                });
         } else {
             return;
         }

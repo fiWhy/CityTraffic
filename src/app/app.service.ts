@@ -38,7 +38,7 @@ export class AppService {
                     placeId: city.place_id,
                 };
                 Object.assign(this.AuthProvider.currentUser, updates);
-                this.RequestProvider.patch(`users/${this.AuthProvider.currentUser.id}`, updates)
+                this.RequestProvider.patch(`users/${this.AuthProvider.currentUser.id}`, updates);
                 return city;
             }).then((city) => {
                 this.ToastService.showSimple(city.formatted_address);
@@ -51,9 +51,9 @@ export class AppService {
         const pinPosition = this.CoreConstants.MAIN_TOAST_POSITION;
         return this.AuthProvider.authenticate()
             .then((data) => {
-                this.ToastService.showSimple(`Welcome, ${data.username}`)
+                this.ToastService.showSimple(`Welcome, ${data.username}`);
             }).catch((err) => {
-                this.ToastService.showSimple(err.message)
+                this.ToastService.showSimple(err.message);
             });
     }
 

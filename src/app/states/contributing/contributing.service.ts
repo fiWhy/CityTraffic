@@ -32,9 +32,8 @@ export class ContributingService {
                 return this.ChooseOnMapDialogService.show({
                     zoom: 12,
                     center: coordinates,
-                })
-            })
-
+                });
+            });
     }
 
     private prepareData(data: IFormData) {
@@ -43,9 +42,9 @@ export class ContributingService {
             title: `${data.startPoint.formatted_address} -${data.endPoint.formatted_address}`,
             startPoint: this.GeoService.exportLatLng(data.startPoint),
             endPoint: this.GeoService.exportLatLng(data.endPoint),
-            additional: data.additional? data.additional.map((add) => this.GeoService.exportLatLng(add)): [],
+            additional: data.additional ? data.additional.map((add) => this.GeoService.exportLatLng(add)) : [],
         };
         preparedData.userId = this.AuthProvider.currentUser.id;
-        return preparedData
+        return preparedData;
     }
 }

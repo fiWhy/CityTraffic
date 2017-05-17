@@ -17,4 +17,4 @@ export const CoreModule: ng.IModule = angular.module("app.core", [
     .service(AuthService.name, AuthService)
     .service(GeoService.name, GeoService)
     .service(ToastService.name, ToastService)
-    .constant("CoreConstants", coreConstants())
+    .constant("CoreConstants", coreConstants());

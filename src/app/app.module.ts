@@ -31,6 +31,6 @@ angular.module("app", [
     .config(routesConfig)
     .service(AppService.name, AppService)
     .component(TopBarComponentName, TopBar)
-    .component(SideNavComponentName, SideNav)
+    .component(SideNavComponentName, SideNav);
 
 angular.bootstrap(document.getElementById("app"), ["app"]);

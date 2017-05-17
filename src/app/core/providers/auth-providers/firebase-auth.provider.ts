@@ -77,8 +77,7 @@ export class FirebaseAuthProvider implements IAuthProvider {
                 userRef.$save();
             }
             return preparedUser;
-        })
-
+        });
     }
 
     private registerListeners() {
@@ -105,8 +104,8 @@ export class FirebaseAuthProvider implements IAuthProvider {
             if (record) {
                 this.FirebaseRequestProvider.patch(`users/${uid}`, {
                     lastLogin: new Date(),
-                })
-            }
+                });
+            };
             return record;
         });
     }

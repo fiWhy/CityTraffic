@@ -16,8 +16,8 @@ export class GeoService {
             this.askNavigator((pos) => {
                 defered.resolve(pos);
             }, (err) => {
-                defered.reject(err.message)
-            })
+                defered.reject(err.message);
+            });
         } else {
             defered.resolve(this.currentPosition);
         }
@@ -27,14 +27,14 @@ export class GeoService {
     public askGeocoder(options: google.maps.GeocoderRequest, types?: string[]): Promise<google.maps.GeocoderResult[]> {
         return new Promise((resolve, reject) => {
             this.geocoderService.geocode(options, (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
-                if (this.geocodeErrorStatuses.indexOf(status) != -1 || !results.length) {
+                if (this.geocodeErrorStatuses.indexOf(status) !== -1 || !results.length) {
                     reject(results);
                 } else {
                     const chosenAdddresses = this.chooseLocationByType(results, types);
                     resolve(chosenAdddresses);
                 }
-            })
-        })
+            });
+        });
     }
 
     public genLatLng(lat: number, lng: number): google.maps.LatLng {
@@ -54,14 +54,14 @@ export class GeoService {
                 } else {
                     throw new Error("No location was found!");
                 }
-            })
+            });
     }
 
     public exportLatLng(location: google.maps.GeocoderResult) {
         return {
             lat: location.geometry.location.lat(),
             lng: location.geometry.location.lng(),
-        }
+        };
     }
 
     private askNavigator(successCallback: PositionCallback, errorCallback: PositionErrorCallback): void {
@@ -72,7 +72,7 @@ export class GeoService {
         if (types) {
             return filter<google.maps.GeocoderResult>(results, (result) => {
                 return every(types, (el) => result.types.indexOf(el) !== -1);
-            })
+            });
         } else {
             return results;
         }
