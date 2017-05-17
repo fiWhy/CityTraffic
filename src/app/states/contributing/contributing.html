@@ -54,7 +54,7 @@
                 class="md-block" placeholder="End point"></md-google-autocomplete>
         </div>
     </form>
-    <md-button class="md-fab md-fab-bottom-right" ng-click="Contributing.contribute()" ;>
+    <md-button ng-if="Contributing.AuthProvider.currentUser.location" class="md-fab md-fab-bottom-right" ng-click="Contributing.contribute()" ;>
         <md-icon md-svg-src="add-white"></md-icon>
         <md-tooltip>
             Contribute
