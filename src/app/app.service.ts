@@ -38,6 +38,7 @@ export class AppService {
                     placeId: city.place_id,
                 };
                 Object.assign(this.AuthProvider.currentUser, updates);
+                Object.assign(this.AuthProvider.currentUser, new User(this.AuthProvider.currentUser));
                 this.RequestProvider.patch(`users/${this.AuthProvider.currentUser.id}`, updates);
                 return city;
             }).then((city) => {
