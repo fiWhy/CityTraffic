@@ -54,8 +54,6 @@ export class TrafficMap {
                 google.maps.event.trigger(map, "resize");
                 map.setCenter(center);
             });
-        } else {
-            this.ToastService.showSimple("Please set your current coordinates first");
         }
     }
 

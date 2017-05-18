@@ -44,7 +44,7 @@ export class MdGoogleAutocomplete implements ng.IController {
                         return data;
                     }
                 }).catch((err) => {
-                    console.log("Error", err);
+                    return [];
                 });
         }
     }
