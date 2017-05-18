@@ -3,7 +3,6 @@ const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
 
 const webpackPluginsFnc = (karma: boolean = false): any => {
     const plugins = [
@@ -26,14 +25,6 @@ const webpackPluginsFnc = (karma: boolean = false): any => {
         new ExtractTextPlugin({
             filename: "style.css",
         }),
-        new TypedocWebpackPlugin({
-            name: "Contoso",
-            mode: "file",
-            theme: "default",
-            out: config.docs,
-            includeDeclarations: false,
-            ignoreCompilerErrors: true,
-        }, './src/app'),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),

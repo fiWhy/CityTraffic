@@ -10,4 +10,4 @@ export const ServicesModule: ng.IModule = angular.module("app.core.services", [
     .service(NetworkService.name, NetworkService)
     .service(AuthService.name, AuthService)
     .service(GeoService.name, GeoService)
-    .service(ToastService.name, ToastService)
+    .service(ToastService.name, ToastService);
