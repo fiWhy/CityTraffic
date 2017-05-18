@@ -70,7 +70,7 @@ export class FirebaseAuthProvider implements IAuthProvider {
 
     private createOrUpdateUserInFirebase(user: firebase.UserInfo) {
         const userRef = this.$firebaseObject(this.firebaseRef.child("users"));
-        this.getUserFromFirebase(user.uid).then((fbUser: User) => {
+        return this.getUserFromFirebase(user.uid).then((fbUser: User) => {
             const preparedUser = new User(this.prepareUser(user));
             if (!fbUser) {
                 userRef[preparedUser.providerId] = preparedUser;
