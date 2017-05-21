@@ -14,10 +14,15 @@ describe("App service", () => {
 
     beforeEach(mock.module("app"));
     beforeEach(mock.module({
-        AuthProvidersFactory: {
+        AuthService: {},
+        AuthProvider: {
             connect() { },
             authenticate() { }
         },
+        RequestProvider: {},
+        GeoService: {},
+        ToastService: {},
+        CoreConstants: {},
         $firebaseObject: () => ({
             $bindTo() { }
         }),

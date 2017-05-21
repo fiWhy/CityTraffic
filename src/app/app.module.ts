@@ -11,7 +11,7 @@ import { routes } from "./app.route";
 
 firebase.initializeApp(firebaseConfig());
 
-import { TopBar, TopBarComponentName, SideNav, SideNavComponentName } from "./components";
+import { TopBar, SideNav } from "./components";
 
 import { AppService } from "./app.service";
 
@@ -30,7 +30,7 @@ angular.module("app", [
     .config(materialConfig)
     .config(routesConfig)
     .service(AppService.name, AppService)
-    .component(TopBarComponentName, TopBar)
-    .component(SideNavComponentName, SideNav);
+    .component(TopBar.selector, TopBar)
+    .component(SideNav.selector, SideNav);
 
 angular.bootstrap(document.getElementById("app"), ["app"]);

@@ -1,9 +1,19 @@
 import * as angular from "angular";
+import { Contribution } from "../../../../core/entities";
 
-import { RightSideNav as RightSideNavController } from "./right-side-nav";
+export class RightSideNavController {
+    private selectedDirection: Contribution;
 
-export const RightSideNavComponentName = "rightSideNav";
-export const RightSideNav: ng.IComponentOptions = {
+    directionSelected(direction: { direction: Contribution }) { }
+
+    changeDirection(direction: Contribution) {
+        this.selectedDirection = direction;
+        this.directionSelected({ direction });
+    }
+}
+
+export const RightSideNav = {
+    selector: "rightSideNav",
     controller: RightSideNavController,
     controllerAs: RightSideNavController.name,
     template: require("./right-side-nav.html"),

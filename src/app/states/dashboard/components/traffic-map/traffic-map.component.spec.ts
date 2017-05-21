@@ -3,6 +3,22 @@ import { mock } from "angular";
 describe("TrafficMap component controller", () => {
     let $componentController;
     beforeEach(mock.module('app'));
+    beforeEach(mock.module({
+        NgMap: {
+            getMap() {
+                return new Promise((resolve, reject) => { });
+            }
+        },
+        $mdToast: {},
+        CoreConstants: {},
+        GeoService: {},
+        AuthProvider: {},
+        $q: {
+            when() {},
+        },
+        $scope: {},
+        ToastService: {}
+    }));
     beforeEach(inject((_$componentController_) => {
         $componentController = _$componentController_;
     }));

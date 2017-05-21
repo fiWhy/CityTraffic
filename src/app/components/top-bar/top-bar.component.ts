@@ -1,7 +1,17 @@
-import { TopBar as TopBarController } from "./top-bar";
+class TopBarController {
+    static $inject = ["$mdSidenav"];
+    private isLeftSideNavOpened: boolean = true;
+    private leftSideNavId: string;
 
-export const TopBarComponentName = "topBar";
-export const TopBar: ng.IComponentOptions = {
+    constructor(private $mdSidenav: ng.material.ISidenavService) { }
+
+    private toggleLeftSideNav() {
+        this.$mdSidenav(this.leftSideNavId).toggle();
+        this.isLeftSideNavOpened = !this.isLeftSideNavOpened;
+    }
+}
+export const TopBar = {
+    selector: "topBar",
     controller: TopBarController,
     controllerAs: TopBarController.name,
     bindings: {
