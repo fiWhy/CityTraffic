@@ -5,7 +5,7 @@ import { Contribution } from "../../../../core/entities";
 import "./traffic-map.scss";
 
 export class TrafficMapController {
-    static $inject = ["NgMap", "$mdToast", "CoreConstants", "GeoService", "AuthProvider", "$q", "$scope", "ToastService"];
+    static $inject = ["NgMap", "$mdToast", "CoreConstants", "GeoService", "AuthProvider", "$scope", "ToastService"];
     private zoom: number;
     private center: google.maps.LatLng;
     private defaultZoom: number = 10;
@@ -15,7 +15,6 @@ export class TrafficMapController {
         private CoreConstants,
         private GeoService: GeoService,
         private AuthProvider: IAuthProvider,
-        private $q: ng.IQService,
         private $scope: ng.IScope,
         private ToastService: ToastService) {
         this.initMap();
