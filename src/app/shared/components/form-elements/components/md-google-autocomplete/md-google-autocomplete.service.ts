@@ -62,7 +62,7 @@ export class MdGoogleAutocompleteService {
                         const location = this.chooseLocationByType(result, types);
                         resolve(location);
                     }
-                })
+                });
         });
     }
 
@@ -79,7 +79,7 @@ export class MdGoogleAutocompleteService {
     public getType(address_components: google.maps.GeocoderAddressComponent[], type: string = "administrative_area_level_1") {
         return find(address_components, (address_component) => {
             return address_component.types.indexOf(type) !== -1;
-        })
+        });
     }
 
     private prepareSearchOptions(input: string,

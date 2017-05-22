@@ -7,7 +7,7 @@ export class App {
     constructor(
         private $rootScope: ng.IScope,
         private AppService: AppService,
-        private CoreConstants,
+        private CoreConstants
     ) {
         this.connectToServer();
     }

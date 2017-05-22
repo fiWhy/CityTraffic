@@ -5,3 +5,5 @@ coverage
 src/app/config/firebase.config.ts
 src/app/core/key.constants.ts
 .vs
+.vscode
+config/keys.config.ts

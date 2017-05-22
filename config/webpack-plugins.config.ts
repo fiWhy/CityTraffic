@@ -1,4 +1,5 @@
 import { config } from "./main.config";
+import { keysConfig } from "./keys.config";
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -26,9 +27,13 @@ const webpackPluginsFnc = (karma: boolean = false): any => {
             filename: "style.css",
         }),
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/index.ejs',
+            google: {
+                apiKey: keysConfig.GOOGLE.API_KEY,
+                libraries: keysConfig.GOOGLE.LIBRARIES,
+            },
         }),
-        new CopyWebpackPlugin([ { from: 'src/app/assets', to: config.serveFilesPath } ])
+        new CopyWebpackPlugin([{ from: 'src/app/assets', to: config.serveFilesPath }])
     ];
 
     if (!karma) {
