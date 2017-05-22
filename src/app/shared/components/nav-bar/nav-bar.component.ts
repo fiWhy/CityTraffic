@@ -15,7 +15,7 @@ export const NavBar = {
     selector: "navBar",
     template: require("./nav-bar.html"),
     controller: NavBarController,
-    controllerAs: NavBarController.name,
+    controllerAs: "NavBar",
     bindings: {
         list: "<",
     },

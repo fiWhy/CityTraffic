@@ -82,7 +82,7 @@ export class TrafficMapController {
 export const TrafficMap = {
     selector: "trafficMap",
     controller: TrafficMapController,
-    controllerAs: TrafficMapController.name,
+    controllerAs: "TrafficMap",
     template: require("./traffic-map.html"),
     bindings: {
         zoom: "<",

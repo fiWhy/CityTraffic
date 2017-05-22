@@ -15,7 +15,7 @@ export class RightSideNavController {
 export const RightSideNav = {
     selector: "rightSideNav",
     controller: RightSideNavController,
-    controllerAs: RightSideNavController.name,
+    controllerAs: "RightSideNav",
     template: require("./right-side-nav.html"),
     bindings: {
         directions: "<",

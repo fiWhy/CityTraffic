@@ -83,7 +83,7 @@ class MdGoogleAutocompleteController implements ng.IController {
 export const MdGoogleAutocomplete = {
     selector: "mdGoogleAutocomplete",
     controller: MdGoogleAutocompleteController,
-    controllerAs: MdGoogleAutocompleteController.name,
+    controllerAs: "MdGoogleAutocomplete",
     template: require("./md-google-autocomplete.html"),
     bindings: {
         label: "@",

@@ -10,10 +10,11 @@ class TopBarController {
         this.isLeftSideNavOpened = !this.isLeftSideNavOpened;
     }
 }
+
 export const TopBar = {
     selector: "topBar",
     controller: TopBarController,
-    controllerAs: TopBarController.name,
+    controllerAs: "TopBar",
     bindings: {
         auth: "&",
         signOut: "&",

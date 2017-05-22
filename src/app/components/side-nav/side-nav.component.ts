@@ -7,7 +7,7 @@ class SideNavController {
 export const SideNav = {
     selector: "sideNav",
     controller: SideNavController,
-    controllerAs: SideNavController.name,
+    controllerAs: "SideNav",
     template: require("./side-nav.html"),
     bindings: {
         componentId: "@",

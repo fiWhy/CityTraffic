@@ -21,6 +21,7 @@ export class App {
     }
 
     private auth() {
+        console.log("auth");
         this.AppService.authenticate();
     }
 
