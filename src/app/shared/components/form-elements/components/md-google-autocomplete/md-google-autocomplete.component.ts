@@ -10,7 +10,8 @@ class MdGoogleAutocompleteController implements ng.IController {
     private ngModel: any;
     private location: google.maps.LatLng;
     private radius: number;
-    private bounds: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral;
+    private currentLocation: google.maps.LatLng | string;
+    private bounds: google.maps.LatLngBounds;
     constructor(private MdGoogleAutocompleteService: MdGoogleAutocompleteService,
         private $timeout: ng.ITimeoutService,
         private $scope: ng.IScope,
@@ -19,6 +20,8 @@ class MdGoogleAutocompleteController implements ng.IController {
     }
 
     public placeChange({ place }) { }
+
+    public onError({ error }) { }
 
     private setWatchers() {
         this.$scope.$watch("MdGoogleAutocomplete.ngModel", (newData: any, oldData: any) => {
@@ -59,17 +62,33 @@ class MdGoogleAutocompleteController implements ng.IController {
 
     private selectedItemChange() {
         if (this.selectedItem) {
-            this.MdGoogleAutocompleteService.getLatLng(this.selectedItem.place_id)
-                .then((place: google.maps.GeocoderResult) => {
+            this.checkForLocation(this.selectedItem);
+        } else {
+            return;
+        }
+    }
+
+    private checkForLocation(selectedItem) {
+        this.MdGoogleAutocompleteService.getLatLng(selectedItem.place_id)
+            .then((place: google.maps.GeocoderResult) => {
+                if (this.checkLocation(place, this.bounds)) {
                     this.ngModel = place;
                     this.$timeout(() => {
                         this.placeChange({ place });
                     });
-                }).catch((err) => {
-                    console.log("Error", err);
-                });
+                } else {
+                    this.onError({ error: "Location in wrong area!" });
+                }
+            }).catch((err) => {
+                console.log("Error", err);
+            });
+    }
+
+    private checkLocation(place: google.maps.GeocoderResult, bounds: google.maps.LatLngBounds) {
+        if (!bounds) {
+            return true;
         } else {
-            return;
+            return bounds.contains(place.geometry.location);
         }
     }
 
@@ -93,8 +112,10 @@ export const MdGoogleAutocomplete = {
         visibleModel: "=",
         ngModel: "=",
         placeChange: "&",
+        onError: "&",
         required: "=",
         location: "<",
+        currentLocation: "<",
         radius: "<",
         bounds: "<",
     },

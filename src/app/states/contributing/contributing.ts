@@ -58,12 +58,16 @@ export class Contributing {
 
     private validate(data: IFormData): Promise<IFormData> {
         return new Promise((resolve, reject) => {
-            if (!data.startPoint.place_id || !data.endPoint.place_id) {
+            if ((!data.startPoint || !data.startPoint.place_id) || (!data.endPoint || !data.endPoint.place_id)) {
                 reject("You need to pick google map item");
             } else {
                 resolve(data);
             }
         });
+    }
+
+    private handleError(error) {
+        this.ToastService.showSimple(error);
     }
 
     private addAdditionalPoint() {
