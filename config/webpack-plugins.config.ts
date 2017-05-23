@@ -28,6 +28,7 @@ const webpackPluginsFnc = (karma: boolean = false): any => {
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.ejs',
+            title: "City Traffic",
             google: {
                 apiKey: keysConfig.GOOGLE.API_KEY,
                 libraries: keysConfig.GOOGLE.LIBRARIES,
