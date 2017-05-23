@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 export const webpackConfig = (karma: boolean = false) => {
     const preparedEntry = karma ? {} : {
         entry: {
+            webpackServer: 'webpack-dev-server/client?https://0.0.0.0:8080',
+            webpack: 'webpack/hot/dev-server',
             app: config.entry,
             vendor: config.vendor,
         },

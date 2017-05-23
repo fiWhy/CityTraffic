@@ -1,3 +1,5 @@
+import * as angular from "angular";
+
 import { NavBarServiceImplementation as NavBarService } from "./services/nav-bar.service";
 import { IMenuItem } from "./providers/nav-bar.service.provider";
 

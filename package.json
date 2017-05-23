@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "setup": "npm i -g typescript node-sass karma-cli",
+    "setup": "npm i -g typescript node-sass karma-cli ts-node",
     "serve": "ts-node ./tasks/webpack-server.ts",
     "build": "ts-node ./tasks/webpack.ts",
     "start": "npm run serve",
@@ -32,7 +32,6 @@
     "@types/jasmine": "2.5.41",
     "@types/karma": "^0.13.35",
     "@types/lodash": "^4.14.64",
-    "@types/ngmap": "^1.17.2",
     "@types/node": "^7.0.13",
     "@types/sinon": "^2.1.3",
     "@types/webpack": "^2.2.15",

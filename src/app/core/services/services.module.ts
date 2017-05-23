@@ -1,3 +1,5 @@
+import * as angular from "angular";
+
 import { CacheService } from "./cache.service";
 import { NetworkService } from "./network.service";
 import { AuthService } from "./auth/auth.service";
